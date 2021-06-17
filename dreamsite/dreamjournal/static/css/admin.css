@@ -1,0 +1,45 @@
+.app-djstripe {
+    display: none !important;
+}
+.app-auth {
+    display: none !important;
+}
+#changelist #changelist-search img {
+    vertical-align: middle;
+    margin-right: 4px;
+    height: 15px;
+}
+
+#header {
+    height: 100px;
+    background-color: rgb(19, 19, 51);
+}
+#header h1{
+    padding-left: 9px;
+    padding-bottom: 10px;
+}
+#header h2{
+    padding-top: 10px;
+}
+.module h2, .module caption, .inline-group h2, div.breadcrumbs{
+    background-color:rgb(19, 19, 51) ;
+}
+a:link, a:visited{
+    color:rgb(19, 19, 51);
+}
+
+.button, input[type=submit], input[type=button], .submit-row input, a.button{
+    background-color:rgb(19, 19, 51) ;
+}
+
+.button:hover, input[type=submit]:hover, input[type=button]:hover{
+    background-color: rgb(25, 25, 112)!important;
+}
+
+.login {
+    background: aliceblue !important;
+    height: auto;
+}
+#container > .main {
+    background-color: cadetblue !important;
+}

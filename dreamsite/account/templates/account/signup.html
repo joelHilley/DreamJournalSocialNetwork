@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+  <div class="row bg-gray mt-5 ml-5">
+  <h1>Sign Up</h1>
+    <div class="my-3 alert alert-secondary" role="alert">
+      <form method="POST">
+        {% csrf_token %}
+        {% for field in form %}
+          <p>
+            {{ field.label_tag }}<br>
+            {{ field }}
+            {% if field.help_text %}
+              <small style="color: grey">{{ field.help_text }}</small>
+            {% endif %}
+            {% for error in field.errors %}
+              <p style="color: red">{{ error }}</p>
+            {% endfor %}
+          </p>
+        {% endfor %}
+        <button class='mx-5 btn btn-md btn-fill btn-primary' 
+                type="submit" value="Sign Up">
+          <h2>Submit</h2>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
