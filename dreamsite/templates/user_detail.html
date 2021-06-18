@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
 <div>
-  <h3>{{JournalPost.username_id|capfirst}}</h3>
+  <h3>{{profile.username|capfirst}}</h3>
+  <h3>{{profile.email|capfirst}}</h3>
+
+
+
+
 </div>
 {% endblock %}

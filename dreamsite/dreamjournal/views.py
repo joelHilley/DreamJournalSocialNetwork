@@ -33,12 +33,9 @@ def post_detail(request, id):
     return render(request, 'post_detail.html', {'post': post})
 
 #view profile of another user
-def user_detail(request, id):
-    try:
-        user = Account.objects.get(id=id)
-    except Account.DoesNotExist:
-        raise Http404('Post not found')
-    return render(request, 'user_detail.html', {'user': user})
+def user_detail(request, pk):
+    profile = Account.objects.get(pk=pk)
+    return render(request, 'user_detail.html', {'pk':pk, 'profile':profile})
 
 def add_journal_post(request):
     if request.method == "POST":
@@ -65,10 +62,10 @@ class PostDetailView(generic.DetailView):
     model = JournalPost
     template_name = 'post_detail.html'
 
-class UserDetailView(generic.DetailView):
-    model = JournalPost
-    pk_url_kwarg = 'username_id' #changes url requirement from primary key to  username_id
-    template_name = 'user_detail.html'
+# class UserDetailView(generic.DetailView):
+#     model = JournalPost
+#     #pk_url_kwarg = 'username_id' #changes url requirement from primary key to  username_id
+#     template_name = 'user_detail.html'
 
 from django.views.generic import TemplateView
 
