@@ -32,7 +32,7 @@ def post_detail(request, id):
         raise Http404('Post not found')
     return render(request, 'post_detail.html', {'post': post})
 
-#View profile of another user
+#view profile of another user
 def user_detail(request, id):
     try:
         user = Account.objects.get(id=id)
@@ -43,9 +43,10 @@ def user_detail(request, id):
 def add_journal_post(request):
     if request.method == "POST":
         form = JournalPostForm(request.POST)
+        poster = request.user
         if form.is_valid():
             instance = form.save(commit=False)
-            instance.user = request.user.username
+            instance.username = poster
             instance.save()
             form.save()
             return redirect('home')

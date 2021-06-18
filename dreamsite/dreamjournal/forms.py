@@ -37,6 +37,6 @@ class JournalPostForm(ModelForm):
         #category = forms.ChoiceField(choices=CATEGORY_CHOICES, widget=forms.RadioSelect)
         #privacy = forms.ChoiceField(choices=PRIVACY_CHOICES, widget=forms.RadioSelect)
 
-        fields = ['username','title', 'content', 'type', 'category', 'colors_seen', 'privacy']
+        fields = ['title', 'content', 'type', 'category', 'colors_seen', 'privacy']
         #exclude = ['username', 'likes', 'created_at', 'updated_at']
     #post = JournalPost.objects.get(pk=1)

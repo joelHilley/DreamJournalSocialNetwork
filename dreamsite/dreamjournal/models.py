@@ -30,7 +30,7 @@ class JournalPost(models.Model):
     (1,'Private')
     ]
 
-    username = models.ForeignKey(Account, on_delete=models.CASCADE)
+    username = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='poster')
     title = models.CharField(max_length=100, unique=True)
     content = models.TextField(max_length=500)
     type = models.CharField(blank=True, choices=TYPE_CHOICES, max_length=10)

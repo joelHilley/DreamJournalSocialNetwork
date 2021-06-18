@@ -1,16 +1,6 @@
-{% extends 'base.html' %}
-
+{% extends "base.html" %}
 {% block content %}
-<h1>User detail view</h1>
-<div class="container">
-  <div class="row">
-    <div class="col-md-8 card mb-4  mt-3 left  top">
-      <div class="card-body">
-        <p class=" text-muted">{{ post.username }} | {{ post.created_at }}</p>
-        <p class="card-text ">{{ object.content }}</p>
-      </div>
-    </div>
-  </div>
+<div>
+  <h3>{{JournalPost.username_id|capfirst}}</h3>
 </div>
-
-{% endblock content %}
+{% endblock %}
