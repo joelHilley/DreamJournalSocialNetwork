@@ -32,7 +32,7 @@ def post_detail(request, id):
         raise Http404('Post not found')
     return render(request, 'post_detail.html', {'post': post})
 
-#view profile of another user
+#view profile of  users
 def user_detail(request, pk):
     profile = Account.objects.get(pk=pk)
     return render(request, 'user_detail.html', {'pk':pk, 'profile':profile})
