@@ -1,6 +1,6 @@
 from django.contrib import admin
 from account.models import Account
-from dreamjournal.models import JournalPost
+from dreamjournal.models import JournalPost, Comment
 
 class UserAdmin (admin.ModelAdmin):
     list_display = ('id','username','email','date_of_birth','sex','nationality','is_superuser','is_admin')
@@ -16,5 +16,13 @@ class JournalPostAdmin (admin.ModelAdmin):
     search_fields = ('title','username','created_at')
     list_per_page = 25
 
+
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('user', 'body', 'post_id', 'created_on')
+    list_filter = ('user', 'created_on')
+    search_fields = ('user', 'body')
+
+
 admin.site.register(Account, UserAdmin)
 admin.site.register(JournalPost, JournalPostAdmin)
+admin.site.register(Comment, CommentAdmin)
