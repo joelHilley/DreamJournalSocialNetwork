@@ -5,7 +5,7 @@ from django.views.generic import TemplateView
 from dreamjournal.models import JournalPost, Comment
 from account.models import Account
 from . import forms
-from dreamjournal.forms import JournalPostForm
+from dreamjournal.forms import JournalPostForm, CommentForm
 
 # REDUNDANT VIEW
 # def home(request):
@@ -24,15 +24,15 @@ def login_view(request):
 
         return render(request, 'login.html', context)
 
-#REDUNDANT VIEW
-#view individual post and related comments
-# def post_detail(request, id):
-#     try:
-#         post = JournalPost.objects.get(id=id)
-#         comments = Comment.objects.all()
-#     except JournalPost.DoesNotExist:
-#         raise Http404('Post not found')
-#     return render(request, 'post_detail.html', {'post': post, 'comments': comments})
+# REDUNDANT VIEW
+# view individual post and related comments
+def post_detail(request, id):
+    try:
+        post = JournalPost.objects.get(id=id)
+        comments = Comment.objects.filter(post_title=post)
+    except JournalPost.DoesNotExist:
+        raise Http404('Post not found')
+    return render(request, 'post_detail.html', {'post': post, 'comments': comments})
 
     #comments
     # if request.method == 'POST':
@@ -78,9 +78,10 @@ class PostListView(generic.ListView):
    queryset = JournalPost.objects.filter(privacy=0).order_by('-created_at')
    template_name = 'home.html'
 
-class PostDetailView(generic.DetailView):
-    model = JournalPost
-    template_name = 'post_detail.html'
+# class PostDetailView(generic.DetailView):
+#     model = JournalPost
+#     comments = Comment.objects.all()
+#     template_name = 'post_detail.html'
 
     # def get_context_data(self, **kwargs):
     #     context = super(BlogEntryView, self).get_context_data(**kwargs)
