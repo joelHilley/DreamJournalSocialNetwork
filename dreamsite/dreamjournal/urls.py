@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import AboutPageView, home, user_detail
+from .views import AboutPageView, user_detail
 from . import views
 
 

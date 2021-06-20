@@ -2,16 +2,16 @@ from django.views import generic
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.views.generic import TemplateView
-from dreamjournal.models import JournalPost
+from dreamjournal.models import JournalPost, Comment
 from account.models import Account
 from . import forms
 from dreamjournal.forms import JournalPostForm
 
-
-def home(request):
-    form = JournalPostForm()
-    context = {'form' : form}
-    return render(request, 'home.html', context)
+# REDUNDANT VIEW
+# def home(request):
+#     form = JournalPostForm()
+#     context = {'form' : form}
+#     return render(request, 'home.html', context)
 
 def login_view(request):
     username = request.POST['username']
@@ -24,31 +24,31 @@ def login_view(request):
 
         return render(request, 'login.html', context)
 
-#view comments and post in detail
-def post_detail(request, id):
-    try:
-        post = JournalPost.objects.get(id=id)
-    except JournalPost.DoesNotExist:
-        raise Http404('Post not found')
-    #return render(request, 'post_detail.html', {'post': post})
-    #comments
-    if request.method == 'POST':
-        comment_form = CommentForm(data=request.POST)
-        if comment_form.is_valid():
-            # Create Comment object but don't save to database yet
-            new_comment = comment_form.save(commit=False)
-            # Assign the current post to the comment
-            new_comment.post = comment
-            # Save the comment to the database
-            new_comment.save()
-    else:
-        comment_form = CommentForm()
+#REDUNDANT VIEW
+#view individual post and related comments
+# def post_detail(request, id):
+#     try:
+#         post = JournalPost.objects.get(id=id)
+#         comments = Comment.objects.all()
+#     except JournalPost.DoesNotExist:
+#         raise Http404('Post not found')
+#     return render(request, 'post_detail.html', {'post': post, 'comments': comments})
 
-    return render(request, 'post_detail.html', {'comment':comment,
-                                                    'post': post,
-                                           'comments': comments,
-                                           'new_comment': new_comment,
-                                           'comment_form': comment_form})
+    #comments
+    # if request.method == 'POST':
+    #     comment_form = CommentForm(data=request.POST)
+    #     commenter = request.user
+    #     if comment_form.is_valid():
+    #         # Create Comment object but don't save to database yet
+    #         new_comment = comment_form.save(commit=False)
+    #         # Assign the current post to the comment
+    #         new_comment.post = post
+    #         # Save the comment to the database
+    #         new_comment.save()
+    # else:
+    #     comment_form = CommentForm()
+    # return render(request, 'post_detail.html',
+    # {'post': post, 'comments': comments, 'new_comment': new_comment, 'comment_form': comment_form})
 
 #view profile of  users
 def user_detail(request, pk):
@@ -70,7 +70,9 @@ def add_journal_post(request):
     context = {'form' : form}
     return render(request, 'create_post.html', context)
 
+
 from django.views import generic
+
 
 class PostListView(generic.ListView):
    queryset = JournalPost.objects.filter(privacy=0).order_by('-created_at')
@@ -80,6 +82,13 @@ class PostDetailView(generic.DetailView):
     model = JournalPost
     template_name = 'post_detail.html'
 
+    # def get_context_data(self, **kwargs):
+    #     context = super(BlogEntryView, self).get_context_data(**kwargs)
+    #     comment_form = CommentCreateForm()
+    #     context['comment_form'] = comment_form
+    #     return context
+
+#REDUNDANT VIEW
 # class UserDetailView(generic.DetailView):
 #     model = JournalPost
 #     #pk_url_kwarg = 'username_id' #changes url requirement from primary key to  username_id

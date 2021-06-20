@@ -18,7 +18,7 @@ class JournalPostAdmin (admin.ModelAdmin):
 
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('user', 'body', 'post_title', 'created_on')
+    list_display = ('user', 'post_title', 'created_on')
     list_filter = ('user', 'created_on')
     search_fields = ('user', 'body')
 

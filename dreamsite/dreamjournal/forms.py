@@ -40,7 +40,7 @@ class JournalPostForm(ModelForm):
         fields = ['title', 'content', 'type', 'category', 'colors_seen', 'privacy']
         #exclude = ['username', 'likes', 'created_at', 'updated_at']
 
-class CommentForm(forms.ModelForm):
+class CommentForm(ModelForm):
     class Meta:
         model = Comment
-        fields = ('user', 'body')
+        fields = ('body',)
