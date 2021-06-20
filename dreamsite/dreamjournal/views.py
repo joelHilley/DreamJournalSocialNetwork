@@ -30,7 +30,25 @@ def post_detail(request, id):
         post = JournalPost.objects.get(id=id)
     except JournalPost.DoesNotExist:
         raise Http404('Post not found')
-    return render(request, 'post_detail.html', {'post': post})
+    #return render(request, 'post_detail.html', {'post': post})
+    #comments
+    if request.method == 'POST':
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            # Create Comment object but don't save to database yet
+            new_comment = comment_form.save(commit=False)
+            # Assign the current post to the comment
+            new_comment.post = comment
+            # Save the comment to the database
+            new_comment.save()
+    else:
+        comment_form = CommentForm()
+
+    return render(request, 'post_detail.html', {'comment':comment,
+                                                    'post': post,
+                                           'comments': comments,
+                                           'new_comment': new_comment,
+                                           'comment_form': comment_form})
 
 #view profile of  users
 def user_detail(request, pk):

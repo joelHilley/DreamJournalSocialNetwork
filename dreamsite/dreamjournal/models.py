@@ -48,7 +48,7 @@ class JournalPost(models.Model):
         return self.title
 
 class Comment(models.Model):
-    post_id = models.ForeignKey(JournalPost,on_delete=models.CASCADE,related_name='comments')
+    post_title = models.ForeignKey(JournalPost,on_delete=models.CASCADE,related_name='comments')
     user = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='commenter')
     body = models.TextField(max_length=400)
     created_on = models.DateTimeField(auto_now_add=True)

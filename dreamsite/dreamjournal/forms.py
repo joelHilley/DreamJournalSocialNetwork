@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from dreamjournal.models import JournalPost
+from dreamjournal.models import JournalPost, Comment
 #from multiselectfield import MultiSelectField
 from django import forms
 
@@ -39,4 +39,8 @@ class JournalPostForm(ModelForm):
 
         fields = ['title', 'content', 'type', 'category', 'colors_seen', 'privacy']
         #exclude = ['username', 'likes', 'created_at', 'updated_at']
-    #post = JournalPost.objects.get(pk=1)
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('user', 'body')
