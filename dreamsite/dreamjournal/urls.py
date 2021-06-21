@@ -9,5 +9,6 @@ urlpatterns = [
     path('user/<int:pk>', user_detail, name='user_detail'),
     path('about/', AboutPageView.as_view(), name='about'),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('create_post/', views.add_journal_post, name='create_post')
+    path('create_post/', views.add_journal_post, name='create_post'),
+    path('create_comment/', views.create_comment, name='create_comment')
 ]

@@ -33,21 +33,6 @@ def post_detail(request, id):
         raise Http404('Post not found')
     return render(request, 'post_detail.html', {'post': post, 'comments': comments})
 
-    if request.method == 'POST':
-        comment_form = CommentForm(request.POST or None)
-        commenter = request.user
-        if comment_form.is_valid():
-            # Create Comment object but don't save to database yet
-            new_comment = comment_form.save(commit=False)
-            # Assign the current post to the comment
-            new_comment.post_title = post
-            # Save the comment to the database
-            new_comment.save()
-    else:
-        comment_form = CommentForm()
-    return render(request, 'post_detail.html',
-    {'post': post, 'comments': comments, 'new_comment': new_comment, 'comment_form': comment_form})
-
 #view profile of  users
 def user_detail(request, pk):
     profile = Account.objects.get(pk=pk)
@@ -67,6 +52,23 @@ def add_journal_post(request):
         form = JournalPostForm()
     context = {'form' : form}
     return render(request, 'create_post.html', context)
+
+def create_comment(request):
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST or None)
+        commenter = request.user
+        if comment_form.is_valid():
+            # Create Comment object but don't save to database yet
+            new_comment = comment_form.save(commit=False)
+            # Assign the current post to the comment
+            new_comment.post_title = post
+            # Save the comment to the database
+            new_comment.save()
+            return redirect('post_detail.html')
+    else:
+        comment_form = CommentForm()
+    return render(request, 'create_comment.html',
+    {'new_comment': new_comment, 'comment_form': comment_form})
 
 
 from django.views import generic
