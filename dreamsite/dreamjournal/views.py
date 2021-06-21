@@ -24,31 +24,29 @@ def login_view(request):
 
         return render(request, 'login.html', context)
 
-# REDUNDANT VIEW
 # view individual post and related comments
 def post_detail(request, id):
     try:
         post = JournalPost.objects.get(id=id)
-        comments = Comment.objects.filter(post_title=post)
+        comments = Comment.objects.filter(post_title=post).order_by('-id')
     except JournalPost.DoesNotExist:
         raise Http404('Post not found')
     return render(request, 'post_detail.html', {'post': post, 'comments': comments})
 
-    #comments
-    # if request.method == 'POST':
-    #     comment_form = CommentForm(data=request.POST)
-    #     commenter = request.user
-    #     if comment_form.is_valid():
-    #         # Create Comment object but don't save to database yet
-    #         new_comment = comment_form.save(commit=False)
-    #         # Assign the current post to the comment
-    #         new_comment.post = post
-    #         # Save the comment to the database
-    #         new_comment.save()
-    # else:
-    #     comment_form = CommentForm()
-    # return render(request, 'post_detail.html',
-    # {'post': post, 'comments': comments, 'new_comment': new_comment, 'comment_form': comment_form})
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST or None)
+        commenter = request.user
+        if comment_form.is_valid():
+            # Create Comment object but don't save to database yet
+            new_comment = comment_form.save(commit=False)
+            # Assign the current post to the comment
+            new_comment.post_title = post
+            # Save the comment to the database
+            new_comment.save()
+    else:
+        comment_form = CommentForm()
+    return render(request, 'post_detail.html',
+    {'post': post, 'comments': comments, 'new_comment': new_comment, 'comment_form': comment_form})
 
 #view profile of  users
 def user_detail(request, pk):
@@ -80,14 +78,7 @@ class PostListView(generic.ListView):
 
 # class PostDetailView(generic.DetailView):
 #     model = JournalPost
-#     comments = Comment.objects.all()
 #     template_name = 'post_detail.html'
-
-    # def get_context_data(self, **kwargs):
-    #     context = super(BlogEntryView, self).get_context_data(**kwargs)
-    #     comment_form = CommentCreateForm()
-    #     context['comment_form'] = comment_form
-    #     return context
 
 #REDUNDANT VIEW
 # class UserDetailView(generic.DetailView):
