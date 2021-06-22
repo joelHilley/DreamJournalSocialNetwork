@@ -12,7 +12,7 @@
     <script src="https://kit.fontawesome.com/0da6f7d6ea.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="static/css/base.css">
 </head>
-<main>
+<main style="background-image: url({% static '/img/background_dreamcatcher.jpg' %});">
   <header>
     {% if user.is_authenticated %}
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -48,7 +48,7 @@
             </form>
           </div>
         </div>
-      </nav>
+    </nav>
       {% else %}
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
           <div class="container-fluid">
@@ -85,11 +85,11 @@
             </div>
           </div>
         </nav>
-        {% endif %}
-  <body id="bg" style="background-image: url('{% static "static/img/background_dreamcacher.jpg" %}')";>
-  
+    {% endif %}
+  </header>
+  </div>
+  <body >
       
-
     {% block content %}
 
     {% endblock %}
@@ -101,7 +101,5 @@
       Designed by JMP Group
     </div>
   </footer>
-
-  </header>
-</main
+</main>
 </html>
