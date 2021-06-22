@@ -2,10 +2,22 @@
 
 {% block content %}
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Submit">
-</form>
+  {% if user.is_authenticated %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit">
+    </form>
+  {% else %}
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-10 text-center">
+      <h4>Forgot to Log In?</h4>
+      <br>
+      <h3>Or you can Sign Up to create your own account.</h3>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+  {% endif %}
 
 {% endblock %}
