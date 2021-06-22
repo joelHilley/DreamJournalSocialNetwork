@@ -7,7 +7,7 @@
     <div class="col-md-8 card mb-4  mt-3 left  top">
       <div class="card-body">
         <h1>{% block title %} {{ post.title }} {% endblock title %}</h1>
-        <p class=" text-muted">{{ post.username }} | {{ post.created_at }}</p>
+        <a style= "color:gray; font-weight:bold; text-decoration:none" href="{% url 'user_detail' post.username_id %}">{{ post.username }}</a> | {{ post.created_at}}
         <p class="card-text ">{{ post.content }}</p>
       </div>
     </div>
@@ -35,8 +35,9 @@
 
         {% for comment in comments %}
         <div class="comments" style="padding: 10px;">
-          <p class="font-weight-bold">
-            {{ comment.user }}
+          <!-- <p class="font-weight-bold"> -->
+          <a style= "color:gray; font-weight:bold; text-decoration:none" href="{% url 'user_detail' comment.user_id %}">{{ comment.user }}</a> |
+            <!-- {{ comment.user }} -->
             <span class=" text-muted font-weight-normal">
               {{ comment.created_on }}
             </span>
