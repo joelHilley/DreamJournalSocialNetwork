@@ -15,9 +15,10 @@
                 <div class="card mb-4">
                     <div class="card-body">
                         <h2 class="card-title">{{ post.title }}</h2>
-                        <p class="card-text text-muted h6">{{ post.username }} | {{ post.created_at}} </p>
+                        <a style= "color:gray; font-weight:bold; text-decoration:none" href="{% url 'user_detail' post.username_id %}">
+                        {{ post.username }}</a> | {{ post.created_at}}
                         <p class="card-text">{{post.content|slice:":500" }}</p>
-                        <a href="{% url 'post_detail' post.id %}" class="btn btn-primary">Read More &rarr;</a>
+                        <a href="{% url 'post_detail' post.id %}" class="btn btn-primary">View Full Post</a>
                         <a href="{% url 'user_detail' post.username_id %}" class="btn btn-primary">User</a>
                     </div>
                 </div>
@@ -37,9 +38,10 @@
                 <div class="card mb-4">
                     <div class="card-body">
                         <h2 class="card-title">{{ post.title }}</h2>
-                        <p class="card-text text-muted h6">{{ post.username }} | {{ post.created_at}} </p>
+                        <a style= "color:gray; font-weight:bold; text-decoration:none" href="{% url 'user_detail' post.username_id %}">
+                        {{ post.username }}</a> | {{ post.created_at}}
                         <p class="card-text">{{post.content|slice:":500" }}</p>
-                        <a href="{% url 'post_detail' post.id %}" class="btn btn-primary">Read More &rarr;</a>
+                        <a href="{% url 'post_detail' post.id %}" class="btn btn-primary">View Full Post</a>
                         <a href="{% url 'user_detail' post.username_id %}" class="btn btn-primary">User</a>
                     </div>
                 </div>
