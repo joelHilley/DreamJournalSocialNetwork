@@ -4,7 +4,9 @@
 
 {% if user.is_authenticated %}
 <div class="container">
-  <div class="row "></div>
+  <div class="row ">
+
+  </div>
   <div class="row">
     <div class="col-md-4">
       <h2 class=" text-center"><a href="{% url 'create_post' %}">Create new post</a></h2>
@@ -47,12 +49,7 @@
                 {% endfor %}
             </div>
       </div>
-
     </div>
 </div>
-
-
 {% endif %}
-
-
 {% endblock %}
