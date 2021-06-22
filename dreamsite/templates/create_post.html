@@ -1,11 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Submit">
-</form>
+<div class="container">
+  <div class="bg-warning">
+    <h1 class="margin-top:text-center mt-4">Your Dream Journal</h1>
+    <div class="row"> 
+      <div class="col-md-2"></div>
+      <div class="col-md-8 my-5 alert alert-secondary" role="alert">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class='mx-5 btn btn-md btn-fill btn-primary' 
+                    type="submit" value="Submit">
+                <h4 class="text-center">Submit</h4>
+            </button>
+        </form>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}

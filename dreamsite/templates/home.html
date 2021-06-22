@@ -3,41 +3,51 @@
 {% block content %}
 
 {% if user.is_authenticated %}
-
-  <h2><a href="{% url 'create_post' %}" >Create new post</a></h2>
-
+<div class="container">
   <div class="row">
-        <div class="col-md-8 mt-3 left">
-            {% for post in journalpost_list %}
-            <div class="card mb-4">
-                <div class="card-body">
-                    <h2 class="card-title">{{ post.title }}</h2>
-                    <p class="card-text text-muted h6">{{ post.username }} | {{ post.created_at}} </p>
-                    <p class="card-text">{{post.content|slice:":500" }}</p>
-                    <a href="{% url 'post_detail' post.id %}" class="btn btn-primary">Read More &rarr;</a>
-                    <a href="{% url 'user_detail' post.username_id %}" class="btn btn-primary">User</a>
+    <div class="col-md-4">
+      <h2><a href="{% url 'create_post' %}" >Create new post</a></h2>
+    </div>
+    <div class="col-md-8">
+      <div class="row">
+            <div class="col-md-8 mt-3 left">
+                {% for post in journalpost_list %}
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h2 class="card-title">{{ post.title }}</h2>
+                        <p class="card-text text-muted h6">{{ post.username }} | {{ post.created_at}} </p>
+                        <p class="card-text">{{post.content|slice:":500" }}</p>
+                        <a href="{% url 'post_detail' post.id %}" class="btn btn-primary">Read More &rarr;</a>
+                        <a href="{% url 'user_detail' post.username_id %}" class="btn btn-primary">User</a>
+                    </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
-        </div>
-  </div>
-
-{% else %}
-
-<div class="row">
-      <div class="col-md-8 mt-3 left">
-          {% for post in journalpost_list %}
-          <div class="card mb-4">
-              <div class="card-body">
-                  <h2 class="card-title">{{ post.title }}</h2>
-                  <p class="card-text text-muted h6">{{ post.username }} | {{ post.created_at}} </p>
-                  <p class="card-text">{{post.content|slice:":500" }}</p>
-                  <a href="{% url 'post_detail' post.id %}" class="btn btn-primary">Read More &rarr;</a>
-                  <a href="{% url 'user_detail' post.username_id %}" class="btn btn-primary">User</a>
-              </div>
-          </div>
-          {% endfor %}
       </div>
+    </div>
+</div>
+{% else %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-10">
+      <div class="row">
+            <div class="col-md-8 mt-3 left">
+                {% for post in journalpost_list %}
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h2 class="card-title">{{ post.title }}</h2>
+                        <p class="card-text text-muted h6">{{ post.username }} | {{ post.created_at}} </p>
+                        <p class="card-text">{{post.content|slice:":500" }}</p>
+                        <a href="{% url 'post_detail' post.id %}" class="btn btn-primary">Read More &rarr;</a>
+                        <a href="{% url 'user_detail' post.username_id %}" class="btn btn-primary">User</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+      </div>
+
+    </div>
 </div>
 
 
