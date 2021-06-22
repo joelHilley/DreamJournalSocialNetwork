@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" integrity="undefined" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="undefined" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/0da6f7d6ea.js" crossorigin="anonymous"></script>
-
+    <link rel="stylesheet" href="static/css/base.css">
 </head>
 <main>
   <header>
@@ -86,12 +86,14 @@
           </div>
         </nav>
         {% endif %}
-  <body>
+  <body id="bg" style="background-image: url('{% static "static/img/background_dreamcacher.jpg" %}')";>
+  
+      
+
     {% block content %}
-    <div class="image-parent">
-      <img src="./css.background_dreamcatcher.pjg" class="img-fluid" alt="dreamcatcher">
-    </div>
+
     {% endblock %}
+
   </body>
   <footer class="container">
     <div class="fixed-bottom mb-5 ml-5">
