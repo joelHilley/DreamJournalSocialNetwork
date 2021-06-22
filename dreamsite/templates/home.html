@@ -4,9 +4,10 @@
 
 {% if user.is_authenticated %}
 <div class="container">
+  <div class="row "></div>
   <div class="row">
     <div class="col-md-4">
-      <h2><a href="{% url 'create_post' %}" >Create new post</a></h2>
+      <h2 class=" text-center"><a href="{% url 'create_post' %}">Create new post</a></h2>
     </div>
     <div class="col-md-8">
       <div class="row">
@@ -17,8 +18,8 @@
                         <h2 class="card-title">{{ post.title }}</h2>
                         <p class="card-text text-muted h6">{{ post.username }} | {{ post.created_at}} </p>
                         <p class="card-text">{{post.content|slice:":500" }}</p>
-                        <a href="{% url 'post_detail' post.id %}" class="btn btn-primary">Read More &rarr;</a>
-                        <a href="{% url 'user_detail' post.username_id %}" class="btn btn-primary">User</a>
+                        <a href="{% url 'post_detail' post.id %}" class="btn btn-primary"><small>Read More &rarr;</small></a>
+                        <a href="{% url 'user_detail' post.username_id %}" class="btn btn-primary"><small>User</small></a>
                     </div>
                 </div>
                 {% endfor %}
