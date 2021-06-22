@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login
 from django.views.generic import TemplateView
 from dreamjournal.models import JournalPost, Comment
 from account.models import Account
-from . import forms
+#from . import forms
 from dreamjournal.forms import JournalPostForm, CommentForm
 
 # REDUNDANT VIEW
@@ -55,20 +55,21 @@ def add_journal_post(request):
 
 def create_comment(request):
     if request.method == 'POST':
-        comment_form = CommentForm(request.POST or None)
-        commenter = request.user
-        if comment_form.is_valid():
+        form = CommentForm(request.POST)
+        #commenter = request.user
+        if form.is_valid():
             # Create Comment object but don't save to database yet
-            new_comment = comment_form.save(commit=False)
+            new_comment = form.save(commit=False)
+            #new_comment.user_id = commenter
             # Assign the current post to the comment
-            new_comment.post_title = post
+            #new_comment.post_title = post
             # Save the comment to the database
             new_comment.save()
-            return redirect('post_detail.html')
+            return redirect('home' )
     else:
-        comment_form = CommentForm()
+        form = CommentForm()
     return render(request, 'create_comment.html',
-    {'new_comment': new_comment, 'comment_form': comment_form})
+    { 'form': form})
 
 
 from django.views import generic
