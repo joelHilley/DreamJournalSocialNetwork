@@ -1,4 +1,5 @@
-<!doctype html>
+<!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -40,7 +41,7 @@
                 <section class="nav-link">|</section>
               </li>
             </ul>
-            <h2>Hi {{ user.username }}!</h2>
+            <h4>Hi {{ user.username }}!</h4>
             <form class="d-flex">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
               <button class="btn btn-outline-success" type="submit">Search</button>
@@ -51,7 +52,7 @@
       {% else %}
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
           <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'home' %}">Dream Catcher</a>
+            <a class="navbar-brand" href="{% url 'home' %}"><h1>Dream Catcher</h1></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -61,19 +62,19 @@
                   <section class="nav-link">|</section>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'about' %}">About Us</a>
+                  <a class="nav-link" href="{% url 'about' %}"><h3>About Us</h3></a>
                 </li>
                 <li class="nav-item">
                   <section class="nav-link">|</section>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'account:signup' %}">Sign Up</a>
+                  <a class="nav-link" href="{% url 'account:signup' %}"><h3>Sign Up</h3></a>
                 </li>
                 <li class="nav-item">
                   <section class="nav-link">|</section>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login' %}">Log In</a>
+                    <a class="nav-link" href="{% url 'login' %}"><h3>Log In</h3></a>
                   </li>
                 <li class="nav-item">
                   <section class="nav-link">|</section>
@@ -85,6 +86,9 @@
         {% endif %}
   <body>
     {% block content %}
+    <div class="image-parent">
+      <img src="./css.background_dreamcatcher.pjg" class="img-fluid" alt="dreamcatcher">
+    </div>
     {% endblock %}
   </body>
   <footer class="container">
