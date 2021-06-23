@@ -4,7 +4,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-8 card mb-4  mt-3 left  top"  style= "background-image:linear-gradient({{post.colors_seen}})">
+    <div class="col-md-8 card mb-4  mt-3 left  top" style="background-image:linear-gradient(to bottom right,{{post.colors_seen}}); opacity:0.5; border-radius: 10px;">
       <div class="card-body">
         <h1>{% block title %} {{ post.title }} {% endblock title %}</h1>
         <a style= "color:gray; font-weight:bold; text-decoration:none" href="{% url 'user_detail' post.username_id %}">{{ post.username }}</a>
