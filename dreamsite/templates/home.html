@@ -19,7 +19,7 @@
                         <a style= "color:gray; font-weight:bold; text-decoration:none" href="{% url 'user_detail' post.username_id %}">
                         {{ post.username }}</a> | {{ post.created_at}}
                         <p class="card-text">{{post.content|slice:":500" }}</p>
-                        <a href="{% url 'post_detail' post.id %}" class="btn btn-primary">View Full Post</a>
+                        <a href="{% url 'post_detail' post.id %}">{{ post.comments.count }} comments</a>
                     </div>
                 </div>
                 {% endfor %}
