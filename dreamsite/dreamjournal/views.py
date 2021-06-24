@@ -6,6 +6,7 @@ from dreamjournal.models import JournalPost, Comment
 from account.models import Account
 #from . import forms
 from dreamjournal.forms import JournalPostForm, CommentForm
+from django.contrib.auth.decorators import login_required
 
 # REDUNDANT VIEW
 # def home(request):
@@ -25,6 +26,7 @@ def login_view(request):
         return render(request, 'login.html', context)
 
 # view individual post and related comments
+@login_required
 def post_detail(request, id):
     try:
         post = JournalPost.objects.get(id=id)
@@ -34,6 +36,7 @@ def post_detail(request, id):
     return render(request, 'post_detail.html', {'post': post, 'comments': comments})
 
 #view profile of  users
+@login_required
 def user_detail(request, pk):
     profile = Account.objects.get(pk=pk)
     return render(request, 'user_detail.html', {'pk':pk, 'profile':profile})
@@ -43,6 +46,7 @@ def profile(request, pk):
     post = JournalPost.objects.filter(username_id=pk).order_by('-created_at')
     return render(request, 'profile.html', {'pk': pk, "profile":profile, "post":post})
 
+@login_required
 def add_journal_post(request):
     if request.method == "POST":
         form = JournalPostForm(request.POST)
@@ -58,9 +62,11 @@ def add_journal_post(request):
     context = {'form' : form}
     return render(request, 'create_post.html', context)
 
+@login_required
 def create_comment(request, id):
     new_comment = None
     post = JournalPost.objects.get(id=id)
+    comments = Comment.objects.filter(post_title=post).order_by('-id')
     if request.method == 'POST':
         form = CommentForm(data=request.POST)
         commenter = request.user
@@ -73,7 +79,7 @@ def create_comment(request, id):
             instance.save()
             new_comment.save()
             form.save()
-            return redirect('home')
+            return render(request, 'post_detail.html', {'post': post, 'comments': comments})
     else:
         form = CommentForm()
     return render(request, 'create_comment.html',
