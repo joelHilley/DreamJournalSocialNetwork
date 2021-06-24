@@ -55,8 +55,8 @@ class Account(AbstractBaseUser):
 
     email = models.EmailField(verbose_name='email address', max_length=60, unique=True)
     username = models.CharField(max_length=25, unique=True)
-    date_of_birth = models.DateField(verbose_name='date of birth')
-    sex = models.CharField(choices=SEX_CHOICES, max_length=6)
+    date_of_birth = models.DateField(verbose_name='date of birth', help_text='YYYY-MM-DD')
+    sex = models.CharField(choices=SEX_CHOICES, max_length=6, help_text="Not Required")
     nationality = CountryField(blank_label='(select country)')
     date_joined = models.DateTimeField(verbose_name='date joined',auto_now=True)
     number_of_posts = models.PositiveSmallIntegerField(default=0)
