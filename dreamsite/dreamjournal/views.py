@@ -39,12 +39,13 @@ def post_detail(request, id):
 @login_required
 def user_detail(request, pk):
     profile = Account.objects.get(pk=pk)
-    return render(request, 'user_detail.html', {'pk':pk, 'profile':profile})
+    posts = JournalPost.objects.filter(username_id=pk).order_by('-created_at')
+    return render(request, 'user_detail.html', {'pk':pk, 'profile':profile, 'posts':posts})
 
 def profile(request, pk):
     profile = request.user
-    post = JournalPost.objects.filter(username_id=pk).order_by('-created_at')
-    return render(request, 'profile.html', {'pk': pk, "profile":profile, "post":post})
+    posts = JournalPost.objects.filter(username_id=pk).order_by('-created_at')
+    return render(request, 'profile.html', {'pk': pk, "profile":profile, "posts":posts})
 
 @login_required
 def add_journal_post(request):
