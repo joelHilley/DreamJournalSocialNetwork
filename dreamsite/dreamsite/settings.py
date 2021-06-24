@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # user defined apps
     'account',
     'dreamjournal',
+    "django_bootstrap5",
 ]
 
 MIDDLEWARE = [
