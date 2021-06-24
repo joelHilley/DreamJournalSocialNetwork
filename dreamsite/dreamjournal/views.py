@@ -38,6 +38,11 @@ def user_detail(request, pk):
     profile = Account.objects.get(pk=pk)
     return render(request, 'user_detail.html', {'pk':pk, 'profile':profile})
 
+def profile(request, pk):
+    profile = request.user
+    post = JournalPost.objects.filter(username_id=pk).order_by('-created_at')
+    return render(request, 'profile.html', {'pk': pk, "profile":profile, "post":post})
+
 def add_journal_post(request):
     if request.method == "POST":
         form = JournalPostForm(request.POST)
@@ -53,23 +58,26 @@ def add_journal_post(request):
     context = {'form' : form}
     return render(request, 'create_post.html', context)
 
-def create_comment(request):
+def create_comment(request, id):
+    new_comment = None
+    post = JournalPost.objects.get(id=id)
     if request.method == 'POST':
-        form = CommentForm(request.POST)
-        #commenter = request.user
+        form = CommentForm(data=request.POST)
+        commenter = request.user
         if form.is_valid():
             # Create Comment object but don't save to database yet
+            instance = form.save(commit=False)
             new_comment = form.save(commit=False)
-            #new_comment.user_id = commenter
-            # Assign the current post to the comment
-            #new_comment.post_title = post
-            # Save the comment to the database
+            new_comment.post_title = post
+            instance.user = commenter
+            instance.save()
             new_comment.save()
-            return redirect('home' )
+            form.save()
+            return redirect('home')
     else:
         form = CommentForm()
     return render(request, 'create_comment.html',
-    { 'form': form})
+    { 'form': form })
 
 
 from django.views import generic
@@ -79,15 +87,10 @@ class PostListView(generic.ListView):
    queryset = JournalPost.objects.filter(privacy=0).order_by('-created_at')
    template_name = 'home.html'
 
+
 # class PostDetailView(generic.DetailView):
 #     model = JournalPost
 #     template_name = 'post_detail.html'
-
-#REDUNDANT VIEW
-# class UserDetailView(generic.DetailView):
-#     model = JournalPost
-#     #pk_url_kwarg = 'username_id' #changes url requirement from primary key to  username_id
-#     template_name = 'user_detail.html'
 
 from django.views.generic import TemplateView
 

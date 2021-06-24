@@ -29,23 +29,23 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <section class="nav-link">|</section>
+                <section class="nav-link"></section>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'about' %}"><h3>About Us</h3></a>
               </li>
               <li class="nav-item">
-                <section class="nav-link">|</section>
+                <section class="nav-link"></section>
               </li>
               <li>
                 <a class="nav-link" href="{% url 'logout' %}?next={{request.path}}"><h3>Logout</h3></a>
               </li>
               <li class="nav-item">
-                <section class="nav-link">|</section>
+                <section class="nav-link"></section>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                 <h3>Dream</h3> 
+                 <h3>Dream</h3>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li><a class="dropdown-item" href="#">Reality</a></li>
@@ -53,7 +53,7 @@
                 </ul>
               </li>
               <li class="nav-item">
-                <section class="nav-link">|</section>
+                <section class="nav-link"></section>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -64,17 +64,24 @@
                   <li><a class="dropdown-item" href="#">Fantasy</a></li>
                 </ul>
               </li>
-
               <li class="nav-item">
-                <section class="nav-link">|</section>
+                <section class="nav-link"><h4>Hi {{ user.username }}!</h4></section>
+              </li>
+
+              <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+              </form>
+              <li class="nav-item">
+                <section class="nav-link"></section>
+              </li>
+              <li>
+                <a class="nav-link" href="{% url 'profile' user.pk %}"><h3>My Profile</h3></a>
+              </li>
+              <li class="nav-item">
+                <section class="nav-link"></section>
               </li>
             </ul>
-      
-            <h4>Hi {{ user.username }}!</h4>
-            <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
           </div>
         </div>
     </nav>
@@ -90,25 +97,25 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                  <section class="nav-link">|</section>
+                  <section class="nav-link"></section>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'about' %}"><h3>About Us</h3></a>
                 </li>
                 <li class="nav-item">
-                  <section class="nav-link">|</section>
+                  <section class="nav-link"></section>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'account:signup' %}"><h3>Sign Up</h3></a>
                 </li>
                 <li class="nav-item">
-                  <section class="nav-link">|</section>
+                  <section class="nav-link"></section>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'login' %}"><h3>Log In</h3></a>
                   </li>
                 <li class="nav-item">
-                  <section class="nav-link">|</section>
+                  <section class="nav-link"></section>
                 </li>
               </ul>
             </div>

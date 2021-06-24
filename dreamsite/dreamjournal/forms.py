@@ -43,4 +43,4 @@ class JournalPostForm(ModelForm):
 class CommentForm(ModelForm):
     class Meta:
         model = Comment
-        fields = ('user','post_title', 'body',)
+        fields = ('body',)

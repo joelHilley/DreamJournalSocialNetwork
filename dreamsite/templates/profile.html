@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<div class="container">
+  <h2>{{user.username}}'s profile</h2>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-10">
+      <div class="row">
+            <div class="col-md-8 mt-3 left">
+                {% for entry in post %}
+                <div class="card mb-4">
+                    <div class="card-body" style= "background-image:linear-gradient(to bottom right,white,{{post.colors_seen}},black); opacity:0.5; border-radius: 20px;">
+                        <h2 class="card-title">{{ post.title }}</h2>
+                        <a style= "color:gray; font-weight:bold; text-decoration:none" href="{% url 'user_detail' post.username_id %}">
+                        {{ post.username }}</a> | {{ post.created_at}}
+                        <p class="card-text">{{post.content|slice:":500" }}</p>
+                        <a href="{% url 'post_detail' post.id %}">{{ post.comments.count }} comments</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+      </div>
+    </div>
+</div>
+{% else %}
+  <h2>Must be logged in to view your profile</h2>
+{% endif %}
+
+{% endblock %}
