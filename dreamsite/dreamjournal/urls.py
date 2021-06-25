@@ -5,6 +5,10 @@ from . import views
 
 urlpatterns = [
     path('', views.PostListView.as_view(), name='home'),
+    path('nightmare/', views.NightmareListView.as_view(), name='nightmare'),
+    path('dream/', views.DreamListView.as_view(), name='dream'),
+    path('reality/', views.RealityListView.as_view(), name='reality'),
+    path('fantasy/', views.FantasyListView.as_view(), name='fantasy'),
     path('post_detail/<int:id>', post_detail, name='post_detail'),
     path('user/<int:pk>', user_detail, name='user_detail'),
     path('about/', AboutPageView.as_view(), name='about'),

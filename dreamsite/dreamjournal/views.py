@@ -95,6 +95,22 @@ class PostListView(generic.ListView):
    queryset = JournalPost.objects.filter(privacy=0).order_by('-created_at')
    template_name = 'home.html'
 
+class NightmareListView(generic.ListView):
+    queryset = JournalPost.objects.filter(type='Nightmare', privacy=0).order_by('-created_at')
+    template_name = 'nightmare.html'
+
+class DreamListView(generic.ListView):
+    queryset = JournalPost.objects.filter(type='Dream', privacy=0).order_by('-created_at')
+    template_name = 'dream.html'
+
+class RealityListView(generic.ListView):
+    queryset = JournalPost.objects.filter(category='Reality', privacy=0).order_by('-created_at')
+    template_name = 'reality.html'
+
+class FantasyListView(generic.ListView):
+    queryset = JournalPost.objects.filter(category='Fantasy/Unreal', privacy=0).order_by('-created_at')
+    template_name = 'fantasy.html'
+
 
 # class PostDetailView(generic.DetailView):
 #     model = JournalPost

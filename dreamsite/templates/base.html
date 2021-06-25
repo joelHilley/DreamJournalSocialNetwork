@@ -45,11 +45,11 @@
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                 <h3>Dream</h3>
+                 <h3>Type</h3>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">Reality</a></li>
-                  <li><a class="dropdown-item" href="#">Fantasy</a></li>
+                  <li><a class="dropdown-item" href="{% url 'dream' %}">Dream</a></li>
+                  <li><a class="dropdown-item" href="{% url 'nightmare' %}">Nightmare</a></li>
                 </ul>
               </li>
               <li class="nav-item">
@@ -57,11 +57,11 @@
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <h3>Nightmare</h3>
+                  <h3>Category</h3>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">Reality</a></li>
-                  <li><a class="dropdown-item" href="#">Fantasy</a></li>
+                  <li><a class="dropdown-item" href="{% url 'reality' %}">Reality</a></li>
+                  <li><a class="dropdown-item" href="{% url 'fantasy' %}">Fantasy</a></li>
                 </ul>
               </li>
               <li class="nav-item">
