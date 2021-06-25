@@ -65,22 +65,16 @@
                 </ul>
               </li>
               <li class="nav-item">
-                <section class="nav-link"><h4>Hi {{ user.username }}!</h4></section>
+                <section class="nav-link">
+                  <a class="nav-link" href="{% url 'profile' user.pk %}"><h4>Hi {{ user.username }}!</h4></a>
+                </section>
               </li>
-
-              <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-              </form>
-              <li class="nav-item">
-                <section class="nav-link"></section>
-              </li>
-              <li>
-                <a class="nav-link" href="{% url 'profile' user.pk %}"><h3>My Profile</h3></a>
-              </li>
-              <li class="nav-item">
-                <section class="nav-link"></section>
-              </li>
+                <section class="nav-link">
+                  <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                  </form>
+                </section>
             </ul>
           </div>
         </div>

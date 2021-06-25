@@ -10,17 +10,21 @@
     <div class="col-md-10">
       <div class="row">
             <div class="col-md-8 mt-3 left">
+              {% if posts.count == 0 %}
+              <h2> Create a post to see them here <h2>
+              {% else %}
                 {% for post in posts %}
                 <div class="card mb-4">
-                    <div class="card-body" style= "background-image:linear-gradient(to bottom right,white,{{post.colors_seen}},black); opacity:0.5; border-radius: 20px;">
-                        <h2 class="card-title">{{ post.title }}</h2>
-                        <a style= "color:gray; font-weight:bold; text-decoration:none" href="{% url 'user_detail' post.username_id %}">
-                        {{ post.username }}</a> | {{ post.created_at}}
-                        <p class="card-text">{{post.content|slice:":500" }}</p>
-                        <a href="{% url 'post_detail' post.id %}">{{ post.comments.count }} comments</a>
+                    <div class="card-body"  style= "background-image:linear-gradient(to bottom right,{{post.colors_seen}}); opacity:0.5; border-radius: 20px;">
+                      <h2 class="card-title">{{ post.title }}</h2>
+                      <a style= "color:gray; font-weight:bold; text-decoration:none" href="{% url 'user_detail' post.username_id %}">
+                      {{ post.username }}</a> | {{ post.created_at}}
+                      <p class="card-text">{{post.content|slice:":500" }}</p>
+                      <a href="{% url 'post_detail' post.id %}">{{ post.comments.count }} comments</a>
                     </div>
                 </div>
                 {% endfor %}
+                {% endif %}
             </div>
       </div>
     </div>
