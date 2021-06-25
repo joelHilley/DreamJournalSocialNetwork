@@ -40,7 +40,8 @@ def post_detail(request, id):
 def user_detail(request, pk):
     profile = Account.objects.get(pk=pk)
     posts = JournalPost.objects.filter(username_id=pk).order_by('-created_at')
-    return render(request, 'user_detail.html', {'pk':pk, 'profile':profile, 'posts':posts})
+    me = request.user
+    return render(request, 'user_detail.html', {'pk':pk, 'profile':profile, 'posts':posts, 'me':me})
 
 def profile(request, pk):
     profile = request.user

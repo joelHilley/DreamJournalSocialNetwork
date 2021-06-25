@@ -3,9 +3,10 @@
 <div>
   <h3>{{profile.username|capfirst}}</h3>
   <h3>{{profile.email|capfirst}}</h3>
+  <h3>{{me.id}}</h3>
   <div class="col-md-8 mt-3 left">
     {% for post in posts %}
-      {% if post.username_id == profile.id %}
+      {% if post.username_id == me.id %}
         <div class="card mb-4">
             <div class="card-body" style= "background-image:linear-gradient(to bottom right,white,{{post.colors_seen}},black); opacity:0.5; border-radius: 20px;">
                 <h2 class="card-title">{{ post.title }}</h2>
