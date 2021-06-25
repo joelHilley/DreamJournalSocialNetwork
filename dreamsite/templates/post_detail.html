@@ -9,7 +9,7 @@
         <h1>{% block title %} {{ post.title }} {% endblock title %}</h1>
         <a style= "color:gray; font-weight:bold; text-decoration:none" href="{% url 'user_detail' post.username_id %}">{{ post.username }}</a>
          | {{ post.created_at}}
-         <p>{{ post.type}} | {{ post.category}}
+         <p>{{ post.type}} | {{ post.category}}</p>
         <p class="card-text ">{{ post.content }}</p>
       </div>
     </div>

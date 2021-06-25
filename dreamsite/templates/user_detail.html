@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
-<div>
-  <h3>{{profile.username|capfirst}}</h3>
-  <h3>{{profile.email|capfirst}}</h3>
+<div class="container">
+  <h1 style="color:white" class="display-3">{{profile.username}}'s profile</h1>
+  <h1 style="color:white" class="display-6">{{profile.nationality|capfirst}}</h1>
+  <h1 style="color:white" class="display-6">{{profile.date_of_birth|capfirst}}</h1>
   <div class="col-md-8 mt-3 left">
     {% for post in posts %}
       {% if post.username_id == me.id %}
