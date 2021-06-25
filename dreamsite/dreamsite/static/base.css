@@ -6,6 +6,9 @@
 }
 
 /* css style for footer */
+.red {
+  color:red;
+}
 
 .container {
   width: auto;
