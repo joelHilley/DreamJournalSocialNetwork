@@ -3,7 +3,6 @@
 <div>
   <h3>{{profile.username|capfirst}}</h3>
   <h3>{{profile.email|capfirst}}</h3>
-  <h3>{{me.id}}</h3>
   <div class="col-md-8 mt-3 left">
     {% for post in posts %}
       {% if post.username_id == me.id %}
