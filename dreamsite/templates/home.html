@@ -2,13 +2,10 @@
 {% load static %}
 {% block content %}
 
-<p class="red">test</p>
 {% if user.is_authenticated %}
 <div class="container">
-  <!-- <div class="row">
-    <div class="col-md-10"> -->
+  <div class="row">
       <h2 class=" text-center"><a href="{% url 'create_post' %}">Create new post</a></h2>
-            <div class="col-md-8 mt-3 left">
                 {% for post in journalpost_list %}
                 <div class="card mb-4">
                     <div class="card-body" style= "background-image:linear-gradient(to bottom right,white,{{post.colors_seen}},black); opacity:0.5; border-radius: 20px;">
@@ -22,16 +19,11 @@
                 {% endfor %}
             </div>
       </div>
-    </div>
-</div>
 {% else %}
 <div class="container">
-  <div class="row">
-    <div class="col-md-10">
       <div class="row">
-            <div class="col-md-8 mt-3 left">
                 {% for post in journalpost_list %}
-                <div class="card mb-4">
+                <div class="card mb-6">
                     <div class="card-body" style= "background-image:linear-gradient(to bottom right,white,{{post.colors_seen}},black); opacity:0.5; border-radius: 20px;">
                         <h2 class="card-title">{{ post.title }}</h2>
                         <a style= "color:gray; font-weight:bold; text-decoration:none" href="{% url 'user_detail' post.username_id %}">
@@ -43,8 +35,5 @@
                 {% endfor %}
             </div>
       </div>
-    </div>
-</div>
-</div>
 {% endif %}
 {% endblock %}
