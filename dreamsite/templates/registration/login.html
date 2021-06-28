@@ -2,36 +2,42 @@
 
 {% block content %}
 <div class="container">
-  <h1 style="color:white" class="text-center display-3 mt-4">Login</h1>
-  <div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-8 my-5 alert alert-secondary" role="alert">
-      <form method="POST">
-        {% csrf_token %}
-          <table>
-            <tr>
-              <td>{{ form.username.label_tag }}</td>
-              <td>{{ form.username }}</td>
-            </tr>
-            <br>
-            <tr>
-              <td>{{ form.password.label_tag }}</td>
-              <td>{{ form.password }}</td>
-            </tr>
-          </table>
-          <div class="mt-3 text-center">
-            <button class="mx-5 ms-2 btn btn-sm btn-fill btn-dark"
-                    type="submit" value="Login"><h3>Login</h3>
-            </button>
-            <div class="ms-2">
-              <a class="nav-link"
-                href="{% url 'password_reset' %}">Forgot Password?
-              </a>
+  <div class="row mt-5" >
+  <h1 class="text-center display-3 mt-4" style="color: #c98036;">Login</h1>
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6 my-5 alert alert-secondary" role="alert" 
+            style="color: #c98036;">
+        <form method="POST">
+          {% csrf_token %}
+            <table>
+              <tr>
+                <td>{{ form.username.label_tag }}</td>
+                <td>{{ form.username }}</td>
+              </tr>
+              <tr>
+                <td class="py-2"></td>
+              </tr>
+              <tr>
+                <td>{{ form.password.label_tag }}</td>
+                <td>{{ form.password }}</td>
+              </tr>
+            </table>
+            <div class="mt-3 text-center">
+              <button class="mx-5 ms-2 btn btn-sm btn-fill btn-primary" 
+                      style="color: #c98036;"
+                      type="submit" value="Login"><h3>Login</h3>
+              </button>
+              <div class="ms-2">
+                <a class="nav-link"
+                  href="{% url 'password_reset' %}">Forgot Password?
+                </a>
+              </div>
             </div>
-          </div>
-      </form>
+        </form>
+      </div>
+      <div class="col-md-3"></div>
     </div>
-    <div class="col-md-2"></div>
   </div>
 </div>
 
