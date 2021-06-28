@@ -2,14 +2,15 @@
 
 {% block content %}
 {% if user.is_authenticated %}
+<section class="py-5">
 <div class="container">
-  <div class="bg-secondary">
-    <h1 class="margin-top:text-center mt-4">New journal entry..</h1>
-    <div class="row">
+  <div class="bg-secondary pl-5 py-5">
+    <h1 class="text-center mt-2">New journal entry..</h1>
+    <div class="row pl-5">
         <form method="post">
             {% csrf_token %}
-            {{ form.as_p }}
-            <button class='mx-5 btn btn-md btn-fill btn-primary'
+            {{ form.as_p}}
+            <button class='mx-5 mt-3 btn btn-md btn-fill btn-primary'
                     type="submit" value="Submit">
                 <h4 class="text-center">Submit</h4>
             </button>
@@ -19,6 +20,7 @@
     </div>
   </div>
 </div>
+</section>
 {% else %}
 <h2>You must be logged in to create a post</h2>
 {% endif %}

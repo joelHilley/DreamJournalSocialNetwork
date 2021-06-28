@@ -1,7 +1,7 @@
 #bg{
   background-size: 1800px 900px;
   background-repeat: no-repeat;
-  background-position: top;
+  background-position: center;
   background-attachment: fixed;
 }
 
@@ -10,10 +10,10 @@
   width: auto;
   max-width: 1000px;
   padding: 0 15px;
-  background-color: black !important;
+  background-color: rgba(26, 27, 16, 0) !important;
 }
  body {
-   background-color: black;
+   background-color: rgb(86, 184, 154);
  }
 
 .title-text{
