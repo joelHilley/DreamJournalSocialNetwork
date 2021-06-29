@@ -90,7 +90,7 @@ def create_comment(request, id):
 def search(request):
     if request.method == 'POST':
         searched = request.POST['searched']
-        content_search = JournalPost.objects.filter(content__contains=searched, privacy=0).order_by('-created_at')
+        content_search = JournalPost.objects.filter(content__icontains=searched, privacy=0).order_by('-created_at')
         return render(request, 'search.html', context={'searched':searched, 'content_search':content_search})
     else:
         return render(request, 'search.html', context={})

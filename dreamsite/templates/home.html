@@ -14,7 +14,7 @@
               <h2 class="card-title">{{ post.title }}</h2>
               <a style= "color:black; font-weight:bold; text-decoration:none" href="{% url 'user_detail' post.username_id %}">
               {{ post.username }}</a> | {{ post.created_at}}
-               <p<strong>>{{ post.type}} | {{ post.category}}</strong></p>
+               <p><strong>{{ post.type}} | {{ post.category}}</strong></p>
               <p class="card-text">{{post.content|slice:":500" }}</p>
               <a href="{% url 'post_detail' post.id %}">{{ post.comments.count }} comments</a>
           </div>
