@@ -36,10 +36,11 @@ class JournalPost(models.Model):
     type = models.CharField(blank=True, choices=TYPE_CHOICES, max_length=10)
     category = models.CharField(blank=True, choices=CATEGORY_CHOICES, max_length=15)
     colors_seen = MultiSelectField(blank=True, choices=COLOR_CHOICES)
-    likes = models.IntegerField(default=0)
     privacy = models.IntegerField(choices=PRIVACY_CHOICES, default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    likes = models.ManyToManyField(User, blank=True, related_name='likes')
+    dislikes = models.ManyToManyField(User, blank=True, related_name='dislikes')
 
     class Meta:
         ordering = ['-created_at']
