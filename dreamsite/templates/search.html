@@ -21,8 +21,11 @@
       </div>
   </div>
   {% endfor %}
-{% else  %}
+
+{% elif content_search.count == 0 %}
   <h1>There are no posts containing {{ searched }}.</h1>
+{% else  %}
+  <h1>Please enter something in the search bar.</h1>
 {% endif %}
 
 
