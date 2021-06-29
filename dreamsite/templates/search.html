@@ -17,7 +17,6 @@
            <p><strong>{{ content.type}} | {{ content.category}}</strong></p>
           <p class="card-text">{{content.content|slice:":500" }}</p>
           <a href="{% url 'post_detail' content.id %}">{{ content.comments.count }} comments</a>
-
       </div>
   </div>
   {% endfor %}

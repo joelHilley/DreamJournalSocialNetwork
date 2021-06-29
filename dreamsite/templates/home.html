@@ -9,10 +9,10 @@
       <input type="text" class="form-control " onfocusin="create_post()" placeholder="Create new post..." aria-label="create post input" aria-describedby="create post input">
     </div>
     {% for post in journalpost_list %}
-      <div class="card mb-4">
-          <div class="card-body" style="background-image:linear-gradient(to bottom right,white,{{post.colors_seen}},black); opacity:0.5; border-radius: 20px;">
+      <div class="card mb-4" style="background-image:linear-gradient(to bottom right,white,{{post.colors_seen}},black); color:white">
+          <div class="card-body" style=" background-color: #212529; border-radius: 20px; margin-bottom:13px; margin-top:13px">
               <h2 class="card-title">{{ post.title }}</h2>
-              <a style= "color:black; font-weight:bold; text-decoration:none" href="{% url 'user_detail' post.username_id %}">
+              <a style= "color:white; font-weight:bold; text-decoration:none" href="{% url 'user_detail' post.username_id %}">
               {{ post.username }}</a> | {{ post.created_at}}
                <p><strong>{{ post.type}} | {{ post.category}}</strong></p>
               <p class="card-text">{{post.content|slice:":500" }}</p>
