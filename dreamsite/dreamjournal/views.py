@@ -87,6 +87,13 @@ def create_comment(request, id):
     return render(request, 'create_comment.html',
     { 'form': form })
 
+def search(request):
+    if request.method == 'POST':
+        searched = request.POST['searched']
+        content_search = JournalPost.objects.filter(content__contains=searched, privacy=0).order_by('-created_at')
+        return render(request, 'search.html', context={'searched':searched, 'content_search':content_search})
+    else:
+        return render(request, 'search.html', context={})
 
 from django.views import generic
 

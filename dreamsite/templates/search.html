@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block content %}
+
+{% if searched %}
+  <h1 class="mb-5">Showing results for {{ searched }} ...</h1>
+
+  {% for content in content_search %}
+  <div class="card mb-4">
+      <div class="card-body" style="background-image:linear-gradient(to bottom right,white,{{post.colors_seen}},black); opacity:0.5; border-radius: 20px;">
+          <h2 class="card-title">{{ content.title }}</h2>
+          <a style= "color:black; font-weight:bold; text-decoration:none" href="{% url 'user_detail' content.username_id %}">
+          {{ content.username }}</a> | {{ content.created_at}}
+           <p<strong>>{{ content.type}} | {{ content.category}}</strong></p>
+          <p class="card-text">{{content.content|slice:":500" }}</p>
+          <a href="{% url 'post_detail' content.id %}">{{ content.comments.count }} comments</a>
+      </div>
+  </div>
+  {% endfor %}
+{%else%}
+  <h1>Please enter something in the search bar</h1>
+
+{% endif %}
+
+
+{% endblock %}

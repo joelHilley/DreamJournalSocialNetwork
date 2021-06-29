@@ -47,6 +47,11 @@
             </ul>
           </li>
         </ul>
+        <form class="d-flex" method="POST" action = "{% url 'search' %}">
+        {% csrf_token %}
+          <input class="form-control me-2" type="search" placeholder="search for specific content" aria-label="Search" name="searched">
+          <button class="btn btn-outline-primary" type="submit">Search</button>
+        </form>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item d-flex">
             <a class="nav-link" aria-current="page" href="{% url 'logout' %}?next={{request.path}}">Logout</a>
