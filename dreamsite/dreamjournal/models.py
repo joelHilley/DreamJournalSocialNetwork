@@ -31,7 +31,7 @@ class JournalPost(models.Model):
     (0,'Public'),
     (1,'Private')
     ]
-    
+
     username = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='poster')
     title = models.CharField(max_length=50, unique=True)
     content = models.TextField(max_length=500)
@@ -41,15 +41,15 @@ class JournalPost(models.Model):
     privacy = models.IntegerField(choices=PRIVACY_CHOICES, default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    likes = models.ManyToManyField(User, blank=True, related_name='likes')
-    dislikes = models.ManyToManyField(User, blank=True, related_name='dislikes')
+    likes = models.ManyToManyField(Account, blank=True, related_name='likes')
+    dislikes = models.ManyToManyField(Account, blank=True, related_name='dislikes')
 
     class Meta:
         ordering = ['-created_at']
 
     def __str__(self):
         return self.title
-        
+
     def __str__(self):
         return self.username
 

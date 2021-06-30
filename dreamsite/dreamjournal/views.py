@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.views.generic import TemplateView
 from dreamjournal.models import JournalPost, Comment
-from user.models import Account
+from account.models import Account
 #from . import forms
 from dreamjournal.forms import JournalPostForm, CommentForm
 from django.contrib.auth.decorators import login_required
@@ -139,7 +139,7 @@ class AddLike(LoginRequiredMixin, View):
           break
 
       if is_dislike:
-        post.dislikes.remove(request.user)    
+        post.dislikes.remove(request.user)
 
       is_like = False
 
@@ -147,7 +147,7 @@ class AddLike(LoginRequiredMixin, View):
         if like == request.user:
           is_like = True
           break
-      
+
       if not is_like:
         post.likes.add(request.user)
 
@@ -174,7 +174,7 @@ class AddDislike(LoginRequiredMixin, View):
         if dislike == request.user:
           is_dislike = True
           break
-      
+
       if not is_dislike:
         post.dislikes.add(request.user)
 
