@@ -16,12 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('dreamjournal.urls')),
     path('account/', include('account.urls', namespace="accounts")), #signup
-
+    
 # Password reset links (ref: https://github.com/django/django/blob/master/django/contrib/auth/views.py)
 
 #path('password_change/done/', auth_views.PasswordChangeDoneView.as_view(template_name='password_reset/password_change_done.html'),

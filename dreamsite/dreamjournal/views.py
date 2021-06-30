@@ -3,11 +3,15 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.views.generic import TemplateView
 from dreamjournal.models import JournalPost, Comment
-from account.models import Account
+from user.models import Account
 #from . import forms
 from dreamjournal.forms import JournalPostForm, CommentForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
+from django.views import View
+
 
 # REDUNDANT VIEW
 # def home(request):

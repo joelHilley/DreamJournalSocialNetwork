@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -44,7 +45,8 @@ INSTALLED_APPS = [
     # user defined apps
     'account',
     'dreamjournal',
-    "django_bootstrap5",
+    'django_bootstrap5',
+
 ]
 
 MIDDLEWARE = [

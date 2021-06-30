@@ -1,5 +1,7 @@
 from django.db import models
 from account.models import Account
+from django.contrib.auth.models import User
+from django.db import models
 from multiselectfield import MultiSelectField
 
 class JournalPost(models.Model):
@@ -29,7 +31,7 @@ class JournalPost(models.Model):
     (0,'Public'),
     (1,'Private')
     ]
-
+    
     username = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='poster')
     title = models.CharField(max_length=50, unique=True)
     content = models.TextField(max_length=500)
@@ -47,6 +49,9 @@ class JournalPost(models.Model):
 
     def __str__(self):
         return self.title
+        
+    def __str__(self):
+        return self.username
 
 class Comment(models.Model):
     post_title = models.ForeignKey(JournalPost, on_delete=models.CASCADE,related_name='comments')
