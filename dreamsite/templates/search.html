@@ -11,12 +11,12 @@
   {% for content in content_search %}
   <div class="card mb-4" style="background-image:linear-gradient(to bottom right,{{post.colors_seen}},{{post.colors_seen}}); color:white">
       <div class="card-body" style=" background-color: #212529; border-radius: 0px; margin-bottom:13px; margin-top:13px">
-        <a style= "color:white; font-weight:bold; text-decoration:none" href="{% url 'user_detail' post.username_id %}">
+        <a style= "color:white; font-weight:bold; text-decoration:none" href="{% url 'user_detail' content.username_id %}">
         {{ content.username }}</a> | {{ content.created_at}}
           <h2 class="card-title">{{ content.title }}</h2>
           <span>{{ content.category}}   {{ content.type}}</span>
           <p class="card-text">{{content.content|slice:":500" }}</p>
-          <a style="color:grey" href="{% url 'post_detail' post.id %}">{{ content.comments.count }} comments</a>
+          <a style="color:grey" href="{% url 'post_detail' content.id %}">{{ content.comments.count }} comments</a>
       </div>
   </div>
   {% endfor %}
