@@ -1,5 +1,7 @@
 from django.db import models
 from account.models import Account
+from django.contrib.auth.models import User
+from django.db import models
 from multiselectfield import MultiSelectField
 
 class JournalPost(models.Model):
@@ -36,16 +38,20 @@ class JournalPost(models.Model):
     type = models.CharField(blank=True, choices=TYPE_CHOICES, max_length=10)
     category = models.CharField(blank=True, choices=CATEGORY_CHOICES, max_length=15)
     colors_seen = MultiSelectField(blank=True, choices=COLOR_CHOICES)
-    likes = models.IntegerField(default=0)
     privacy = models.IntegerField(choices=PRIVACY_CHOICES, default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    likes = models.ManyToManyField(Account, blank=True, related_name='likes')
+    dislikes = models.ManyToManyField(Account, blank=True, related_name='dislikes')
 
     class Meta:
         ordering = ['-created_at']
 
     def __str__(self):
         return self.title
+
+    def __str__(self):
+        return self.username
 
 class Comment(models.Model):
     post_title = models.ForeignKey(JournalPost, on_delete=models.CASCADE,related_name='comments')

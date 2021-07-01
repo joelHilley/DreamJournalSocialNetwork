@@ -1,38 +1,40 @@
 {% extends "base.html" %}
+
 {% block content %}
 <div class="container">
-  <h1 style="color:white" class="display-3">{{profile.username}}'s profile</h1>
-  <h1 style="color:white" class="display-6">{{profile.nationality|capfirst}}</h1>
-  <h1 style="color:white" class="display-6">{{profile.date_of_birth|capfirst}}</h1>
-  <div class="col-md-8 mt-3 left">
-    {% for post in posts %}
-      {% if post.username_id == me.id %}
-      <div class="card mb-4" style="background-image:linear-gradient(to bottom right,{{post.colors_seen}},{{post.colors_seen}}); color:white">
-          <div class="card-body" style=" background-color: #212529; border-radius: 0px; margin-bottom:13px; margin-top:13px">
-            <a style= "color:white; font-weight:bold; text-decoration:none" href="{% url 'user_detail' post.username_id %}">
-            {{ post.username }}</a> | {{ post.created_at}}
-              <h2 class="card-title">{{ post.title }}</h2>
-              <span>{{ post.category}}   {{ post.type}}</span>
-              <p class="card-text">{{post.content|slice:":500" }}</p>
-              <a style="color:grey" href="{% url 'post_detail' post.id %}">{{ post.comments.count }} comments</a>
-          </div>
-      </div>
-      {% elif post.privacy == 0 %}
-      <div class="card mb-4" style="background-image:linear-gradient(to bottom right,{{post.colors_seen}},{{post.colors_seen}}); color:white">
-          <div class="card-body" style=" background-color: #212529; border-radius: 0px; margin-bottom:13px; margin-top:13px">
-            <a style= "color:white; font-weight:bold; text-decoration:none" href="{% url 'user_detail' post.username_id %}">
-            {{ post.username }}</a> | {{ post.created_at}}
-              <h2 class="card-title">{{ post.title }}</h2>
-              <span>{{ post.category}}   {{ post.type}}</span>
-              <p class="card-text">{{post.content|slice:":500" }}</p>
-              <a style="color:grey" href="{% url 'post_detail' post.id %}">{{ post.comments.count }} comments</a>
-          </div>
-      </div>
-      {% endif %}
-    {% endfor %}
-  </div>
-
-
-
+  <div class="row">
+    <div class="col-md-4 mt-5">
+      <h1 style="color:white" class="display-3">{{profile.username}}'s profile</h1>
+      <h1 style="color:white" class="display-6">{{profile.nationality|capfirst}}</h1>
+      <h1 style="color:white" class="display-6">{{profile.date_of_birth|capfirst}}</h1>
+    </div>
+    <div class="col-md-8 mt-5">
+      {% for post in posts %}
+        {% if post.username_id == me.id %}
+        <div class="card mb-4" style="background-image:linear-gradient(to bottom right,{{post.colors_seen}},{{post.colors_seen}}); color:white">
+            <div class="card-body" style=" background-color: #212529; border-radius: 0px; margin-bottom:13px; margin-top:13px">
+              <a style= "color:white; font-weight:bold; text-decoration:none" href="{% url 'user_detail' post.username_id %}">
+              {{ post.username }}</a> | {{ post.created_at}}
+                <h2 class="card-title">{{ post.title }}</h2>
+                <span>{{ post.category}}   {{ post.type}}</span>
+                <p class="card-text">{{post.content|slice:":500" }}</p>
+                <a style="color:grey" href="{% url 'post_detail' post.id %}">{{ post.comments.count }} comments</a>
+            </div>
+        </div>
+        {% elif post.privacy == 0 %}
+        <div class="card mb-4" style="background-image:linear-gradient(to bottom right,{{post.colors_seen}},{{post.colors_seen}}); color:white">
+            <div class="card-body" style=" background-color: #212529; border-radius: 0px; margin-bottom:13px; margin-top:13px">
+              <a style= "color:white; font-weight:bold; text-decoration:none" href="{% url 'user_detail' post.username_id %}">
+              {{ post.username }}</a> | {{ post.created_at}}
+                <h2 class="card-title">{{ post.title }}</h2>
+                <span>{{ post.category}}   {{ post.type}}</span>
+                <p class="card-text">{{post.content|slice:":500" }}</p>
+                <a style="color:grey" href="{% url 'post_detail' post.id %}">{{ post.comments.count }} comments</a>
+            </div>
+        </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  
 </div>
 {% endblock %}

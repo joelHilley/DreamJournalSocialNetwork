@@ -42,26 +42,50 @@
       -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
   <header>
       {% if user.is_authenticated %}
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand display-5" href="{% url 'home' %}">Dream Catcher</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand display-5" href="{% url 'home' %}">Dream Catcher</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="{% url 'about' %}">About</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Type</a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="{% url 'dream' %}">Dream</a></li>
+                <li><a class="dropdown-item" href="{% url 'nightmare' %}">Nightmare</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Category
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="{% url 'reality' %}">Reality</a></li>
+                <li><a class="dropdown-item" href="{% url 'fantasy' %}">Unreal/Fantasy</a></li>
+              </ul>
+            </li>
+          </ul>
+          <form class="d-flex" method="POST" action = "{% url 'search' %}">
+          {% csrf_token %}
+            <input class="form-control me-2" type="search" placeholder="Journal content..." aria-label="Search" name="searched">
+            <button class="btn btn-outline-warning" type="submit">Search</button>
+          </form>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item d-flex">
+              <a class="nav-link mr-5" aria-current="page" href="{% url 'logout' %}?next={{request.path}}">Logout</a>
+            </li>
+          </ul>
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="{% url 'about' %}">About</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="{% url 'contact' %}">Contact us</a>
           </li>
-          <!-- #add here nav link to contact page -->
-      <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">    
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="{% url 'contact' %}">Contact</a>
-          </li> -->
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Type</a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -77,120 +101,59 @@
               <li><a class="dropdown-item" href="{% url 'reality' %}">Reality</a></li>
               <li><a class="dropdown-item" href="{% url 'fantasy' %}">Unreal/Fantasy</a></li>
             </ul>
+              <a class="navbar-brand" aria-current="page" href="{% url 'profile' user.pk %}">  Hi, {{ user.username }}!</a>
           </li>
-        </ul>
-        <form class="d-flex" method="POST" action = "{% url 'search' %}">
-        {% csrf_token %}
-          <input class="form-control me-2" type="search" placeholder="Journal content..." aria-label="Search" name="searched">
-          <button class="btn btn-outline-warning" type="submit">Search</button>
-        </form>
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item d-flex">
-            <a class="nav-link" aria-current="page" href="{% url 'logout' %}?next={{request.path}}">Logout</a>
-          </li>
-        </ul>
-        <li class="nav-item">
-            <a class="navbar-brand" aria-current="page" href="{% url 'profile' user.pk %}">Hi, {{ user.username }}!</a>
-        </li>
+        </div>
       </div>
-    </div>
-  </nav>
-      <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-          <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'home' %}"><h1>Dream Catcher</h1></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                  <section class="nav-link"></section>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'about' %}"><h3>About</h3></a>
-                </li>
-                <li>
-                  <a class="nav-link" href="{% url 'logout' %}?next={{request.path}}"><h3>Logout</h3></a>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <h3>Type</h3>
-                  </a>
-                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="{% url 'dream' %}">Dream</a></li>
-                    <li><a class="dropdown-item" href="{% url 'nightmare' %}">Nightmare</a></li>
-                  </ul>
-                </li>
-                <li class="nav-item">
-                  <section class="nav-link"></section>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <h3>Category</h3>
-                  </a>
-                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="{% url 'reality' %}">Reality</a></li>
-                    <li><a class="dropdown-item" href="{% url 'fantasy' %}">Fantasy</a></li>
-                  </ul>
-                </li> -->
-                <!-- <li class="nav-item">
-                <section class="nav-link">
-                  <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                  </form>
-                </section>
-              </li> -->
-        {% else %}
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-          <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'home' %}">Dream Catcher</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                  <a class="nav-link" aria-current="page" href="{% url 'about' %}">About</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" aria-current="page" href="{% url 'contact' %}">Contact us</a>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Type</a>
-                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="{% url 'dream' %}">Dream</a></li>
-                    <li><a class="dropdown-item" href="{% url 'nightmare' %}">Nightmare</a></li>
-                  </ul>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Category
-                  </a>
-                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="{% url 'reality' %}">Reality</a></li>
-                    <li><a class="dropdown-item" href="{% url 'fantasy' %}">Unreal/Fantasy</a></li>
-                  </ul>
-                </li>
-              </ul>
-              <ul class="navbar-nav ml-auto">
-                <li class="nav-item d-flex">
-                  <a class="nav-link" aria-current="page" href="{% url 'account:signup'  %}">Signup</a>
-                </li>
-                <li class="nav-item d-flex">
-                  <a class="nav-link" aria-current="page" href="{% url 'login' %}">Login</a>
-                </li>
-              </ul>
-              <!-- <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-              </form> -->
+    </nav>
+      {% else %}
+          <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="{% url 'home' %}">Dream Catcher</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'about' %}">About</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'contact' %}">Contact us</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Type</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <li><a class="dropdown-item" href="{% url 'dream' %}">Dream</a></li>
+                      <li><a class="dropdown-item" href="{% url 'nightmare' %}">Nightmare</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Category
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <li><a class="dropdown-item" href="{% url 'reality' %}">Reality</a></li>
+                      <li><a class="dropdown-item" href="{% url 'fantasy' %}">Unreal/Fantasy</a></li>
+                    </ul>
+                  </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item d-flex">
+                    <a class="nav-link" aria-current="page" href="{% url 'account:signup'  %}">Signup</a>
+                  </li>
+                  <li class="nav-item d-flex">
+                    <a class="nav-link" aria-current="page" href="{% url 'login' %}">Login</a>
+                  </li>
+                </ul>
+                <!-- <form class="d-flex">
+                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-success" type="submit">Search</button>
+                </form> -->
+              </div>
             </div>
-          </div>
-        </nav>
-      {% endif %}
+          </nav>
+        {% endif %}
     </header>
 
     <main>

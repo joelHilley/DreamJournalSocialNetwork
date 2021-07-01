@@ -3,11 +3,23 @@
 {% block content %}
 
   {% if user.is_authenticated %}
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Submit">
-    </form>
+  <div class="container">
+    <div class="row mt-5">
+      <h2 class="text-center display-2 mt-4" 
+          style="color: #c98036">Your Comment</h2>
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 my-5 alert alert-secondary" role="alert">
+
+          <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Submit">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
   {% else %}
   <div class="row">
     <div class="col-md-4"></div>
