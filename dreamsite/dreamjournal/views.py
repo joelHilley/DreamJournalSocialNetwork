@@ -1,5 +1,6 @@
 from django.views import generic
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login
 from django.views.generic import TemplateView
 from dreamjournal.models import JournalPost, Comment
@@ -136,7 +137,7 @@ class AboutPageView(TemplateView):
 # added for likes and dislikes button
 class AddLike(LoginRequiredMixin, View):
   def post(self, request, pk, *args, **kwargs):
-      post = Post.objects.get(pk=pk)
+      post = JournalPost.objects.get(pk=pk)
 
       is_dislike = False
 
@@ -161,9 +162,12 @@ class AddLike(LoginRequiredMixin, View):
       if is_like:
         post.likes.remove(request.user)
 
+      next = request.POST.get('next', '/')
+      return HttpResponseRedirect(next)
+
 class AddDislike(LoginRequiredMixin, View):
   def post(self, request, pk, *args, **kwargs):
-      post = Post.objects.get(pk=pk)
+      post = JournalPost.objects.get(pk=pk)
 
       is_like = False
 
@@ -187,3 +191,6 @@ class AddDislike(LoginRequiredMixin, View):
 
       if is_dislike:
         post.dislikes.remove(request.user)
+
+      next = request.POST.get('next', '/')
+      return HttpResponseRedirect(next)

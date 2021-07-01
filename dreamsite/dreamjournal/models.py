@@ -58,6 +58,7 @@ class Comment(models.Model):
     user = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='commenter')
     body = models.TextField(max_length=400)
     created_on = models.DateTimeField(auto_now_add=True)
+    post = models.ForeignKey('JournalPost', on_delete=models.CASCADE, blank=True, null=True)
 
     class Meta:
         ordering = ['created_on']
