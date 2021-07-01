@@ -11,7 +11,27 @@
             <h2 class="card-title">{{ post.title }}</h2>
             <span>{{ post.category}}   {{ post.type}}</span>
             <p class="card-text">{{post.content|slice:":500" }}</p>
-            <a style="color:grey" href="{% url 'post_detail' post.id %}">{{ post.comments.count }} comments</a>
+            <div class="d-flex flex-row"> 
+              <a style="color:grey" href="{% url 'post_detail' post.id %}">{{ post.comments.count }} comments</a>
+              <form method="POST" action="{% url 'like' post.id %}">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ request.path }}">
+                <button style="background-color: transparent; border: none; box-shadow: none;" type="submit">
+                  <div class="ml-5">
+                    <i class="far fa-thumbs-up"><span>{{ post.likes.all.count }}</span></i>
+                  </div>
+                </button>
+              </form>
+              <form method="POST" action="{% url 'dislike' post.id %}">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ request.path }}">
+                <button style="background-color: transparent; border: none; box-shadow: none;" type="submit">
+                  <div class="ml-5">
+                    <i class="far fa-thumbs-down"><span>{{ post.dislikes.all.count }}</span></i>
+                  </div>
+                </button>
+              </form>
+            </div>
         </div>
     </div>
   </div>
@@ -39,7 +59,8 @@
         {% for comment in comments %}
         <div class="comments" style="padding: 10px;">
           <!-- <p class="font-weight-bold"> -->
-          <a style= "color:gray; font-weight:bold; text-decoration:none" href="{% url 'user_detail' comment.user_id %}">{{ comment.user }}</a> |
+          <a style= "color:gray; font-weight:bold; text-decoration:none" 
+              href="{% url 'user_detail' comment.user_id %}">{{ comment.user }}</a> |
             <!-- {{ comment.user }} -->
           <span class=" text-muted font-weight-normal">
             {{ comment.created_on }}

@@ -18,7 +18,27 @@
                 <h2 class="card-title">{{ post.title }}</h2>
                 <span>{{ post.category}}   {{ post.type}}</span>
                 <p class="card-text">{{post.content|slice:":500" }}</p>
-                <a style="color:grey" href="{% url 'post_detail' post.id %}">{{ post.comments.count }} comments</a>
+                <div class="d-flex flex-row"> 
+                  <a style="color:grey" href="{% url 'post_detail' post.id %}">{{ post.comments.count }} comments</a>
+                  <form method="POST" action="{% url 'like' post.id %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.path }}">
+                    <button style="background-color: transparent; border: none; box-shadow: none;" type="submit">
+                      <div class="ml-5">
+                        <i class="far fa-thumbs-up"><span>{{ post.likes.all.count }}</span></i>
+                      </div>
+                    </button>
+                  </form>
+                  <form method="POST" action="{% url 'dislike' post.id %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.path }}">
+                    <button style="background-color: transparent; border: none; box-shadow: none;" type="submit">
+                      <div class="ml-5">
+                        <i class="far fa-thumbs-down"><span>{{ post.dislikes.all.count }}</span></i>
+                      </div>
+                    </button>
+                  </form>
+                </div>
             </div>
         </div>
         {% elif post.privacy == 0 %}
@@ -29,7 +49,27 @@
                 <h2 class="card-title">{{ post.title }}</h2>
                 <span>{{ post.category}}   {{ post.type}}</span>
                 <p class="card-text">{{post.content|slice:":500" }}</p>
-                <a style="color:grey" href="{% url 'post_detail' post.id %}">{{ post.comments.count }} comments</a>
+                <div class="d-flex flex-row"> 
+                  <a style="color:grey" href="{% url 'post_detail' post.id %}">{{ post.comments.count }} comments</a>
+                  <form method="POST" action="{% url 'like' post.id %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.path }}">
+                    <button style="background-color: transparent; border: none; box-shadow: none;" type="submit">
+                      <div class="ml-5">
+                        <i class="far fa-thumbs-up"><span>{{ post.likes.all.count }}</span></i>
+                      </div>
+                    </button>
+                  </form>
+                  <form method="POST" action="{% url 'dislike' post.id %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.path }}">
+                    <button style="background-color: transparent; border: none; box-shadow: none;" type="submit">
+                      <div class="ml-5">
+                        <i class="far fa-thumbs-down"><span>{{ post.dislikes.all.count }}</span></i>
+                      </div>
+                    </button>
+                  </form>
+                </div>
             </div>
         </div>
         {% endif %}
