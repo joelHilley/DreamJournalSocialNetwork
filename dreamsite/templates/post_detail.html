@@ -41,14 +41,13 @@
           <!-- <p class="font-weight-bold"> -->
           <a style= "color:gray; font-weight:bold; text-decoration:none" href="{% url 'user_detail' comment.user_id %}">{{ comment.user }}</a> |
             <!-- {{ comment.user }} -->
-            <span class=" text-muted font-weight-normal">
-              {{ comment.created_on }}
-            </span>
+          <span class=" text-muted font-weight-normal">
+            {{ comment.created_on }}
+          </span>
           </p>
           {{ comment.body | linebreaks }}
         </div>
         {% endfor %}
       </div>
     </div>
-
 {% endblock content %}
