@@ -24,7 +24,7 @@
       .contact-form{
         background:rgba(0,0,0,.6);
         color:white;
-        margin-top: 30px;
+        margin-top: 60px;
         margin-bottom: 100px;
         padding: 20px;
         box-shadow: 0px 0px 10px 3px grey;
@@ -53,6 +53,9 @@
             <li class="nav-item">
               <a class="nav-link" aria-current="page" href="{% url 'about' %}">About</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="{% url 'contact' %}">Contact us</a>
+            </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Type</a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -75,33 +78,11 @@
             <input class="form-control me-2" type="search" placeholder="Journal content..." aria-label="Search" name="searched">
             <button class="btn btn-outline-warning" type="submit">Search</button>
           </form>
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item d-flex">
-              <a class="nav-link mr-5" aria-current="page" href="{% url 'logout' %}?next={{request.path}}">Logout</a>
-            </li>
-          </ul>
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="{% url 'about' %}">About</a>
+          <li class="nav-item d-flex">
+            <a class="nav-link mr-5" aria-current="page" href="{% url 'logout' %}?next={{request.path}}">Logout</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="{% url 'contact' %}">Contact us</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Type</a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="{% url 'dream' %}">Dream</a></li>
-              <li><a class="dropdown-item" href="{% url 'nightmare' %}">Nightmare</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Category
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="{% url 'reality' %}">Reality</a></li>
-              <li><a class="dropdown-item" href="{% url 'fantasy' %}">Unreal/Fantasy</a></li>
-            </ul>
-              <a class="navbar-brand" aria-current="page" href="{% url 'profile' user.pk %}">  Hi, {{ user.username }}!</a>
+          <li>
+            <a class="navbar-brand" aria-current="page" href="{% url 'profile' user.pk %}">  Hi, {{ user.username }}!</a>
           </li>
         </div>
       </div>
