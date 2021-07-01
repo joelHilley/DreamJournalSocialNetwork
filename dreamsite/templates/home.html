@@ -5,14 +5,16 @@
 {% if user.is_authenticated %}
 <div class="container">
   <div class="row by-5">
-    <div class="input-group my-3">
-      <input type="text" class="form-control " onfocusin="create_post()" 
-            placeholder="Create new post..." aria-label="create post input" 
-            aria-describedby="create post input">
+    <div class="input-group">
+      <div class="my-6 py-6 mt-6">
+        <input type="text" class="form-control " onfocusin="create_post()"
+                placeholder="Have a new dream?..." aria-label="create post input" 
+                aria-describedby="You want to share a new dream?">
+      </div>
     </div>
     {% for post in journalpost_list %}
       <div class="card mb-4" style="background-image:linear-gradient(to bottom right,{{post.colors_seen}},{{post.colors_seen}}); color:white">
-        <div class="card-body" style=" background-color: #212529; border-radius: 0px; margin-bottom:13px; margin-top:13px">
+        <div class="card-body" style=" background-color: #212529; border-radius: 0px; margin-bottom:13px; margin-top:13px;">
           <a style= "color:white; font-weight:bold; text-decoration:none" href="{% url 'user_detail' post.username_id %}">
           {{ post.username }}</a> | {{ post.created_at}}
             <h2 class="card-title">{{ post.title }}</h2>
