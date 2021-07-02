@@ -1,8 +1,8 @@
 from django.views import generic
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, UpdateView
 from dreamjournal.models import JournalPost, Comment
 from account.models import Account
 #from . import forms
@@ -39,7 +39,7 @@ def post_detail(request, id):
         comments = Comment.objects.filter(post_title=post).order_by('-id')
     except JournalPost.DoesNotExist:
         raise Http404('Post not found')
-    return render(request, 'post_detail.html', {'post': post, 'comments': comments})
+    return render(request, 'post_detail.html', {'post': post, 'comments': comments,})
 
 #view profile of  users
 @login_required
@@ -87,7 +87,8 @@ def create_comment(request, id):
             instance.save()
             new_comment.save()
             form.save()
-            return render(request, 'post_detail.html', {'post': post, 'comments': comments})
+            return redirect('home')
+            # return render(request, 'post_detail.html', {'post':post, 'comments':comments})
     else:
         form = CommentForm()
     return render(request, 'create_comment.html',
@@ -103,6 +104,12 @@ def search(request):
 
 from django.views import generic
 
+class UpdatePostView(UpdateView):
+    model = JournalPost
+    template_name = 'update_post.html'
+    fields=['title','content', 'type', 'category', 'privacy', 'colors_seen']
+    def get_success_url(self):
+        return reverse('home')
 
 class PostListView(generic.ListView):
    queryset = JournalPost.objects.filter(privacy=0).order_by('-created_at')
