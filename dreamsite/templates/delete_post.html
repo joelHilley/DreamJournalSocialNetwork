@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<section class="py-5">
+  <div class="container">
+    <div class="row pl-5">
+      <div class="col-md-4"></div>
+      <div class="col-md-10 my-5 alert alert-secondary" role="alert">
+        <h2 class="text-center mt-2">Delete this post...</h2>
+        <div class="row pl-5">
+            <form method="post">
+                {% csrf_token %}
+                <button class='mx-5 mt-3 btn btn-md btn-fill btn-primary'
+                        type="submit" value="Submit">
+                    <h4 class="text-center">Delete</h4>
+                </button>
+            </form>
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+    </div>
+  </div>
+</section>
+{% else %}
+<h2>You must be logged in to create a post</h2>
+{% endif %}
+{% endblock %}

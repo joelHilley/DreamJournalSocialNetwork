@@ -2,7 +2,7 @@ from django.views import generic
 from django.shortcuts import render, redirect, reverse
 from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login
-from django.views.generic import TemplateView, UpdateView
+from django.views.generic import TemplateView, UpdateView, DeleteView
 from dreamjournal.models import JournalPost, Comment
 from account.models import Account
 #from . import forms
@@ -107,6 +107,13 @@ from django.views import generic
 class UpdatePostView(UpdateView):
     model = JournalPost
     template_name = 'update_post.html'
+    fields=['title','content', 'type', 'category', 'privacy', 'colors_seen']
+    def get_success_url(self):
+        return reverse('home')
+
+class DeletePostView(DeleteView):
+    model = JournalPost
+    template_name = 'delete_post.html'
     fields=['title','content', 'type', 'category', 'privacy', 'colors_seen']
     def get_success_url(self):
         return reverse('home')

@@ -32,6 +32,7 @@
                 </button>
                 {%if user.id == post.username_id%}
                 <a style="color:grey" href="{% url 'update_post' post.id %}">Edit</a>
+                <a style="color:grey" href="{% url 'delete_post' post.id %}">Delete</a>
                 {% endif %}
               </form>
             </div>
