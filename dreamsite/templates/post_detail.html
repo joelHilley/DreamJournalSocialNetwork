@@ -30,42 +30,28 @@
                     <i class="far fa-thumbs-down"><span>{{ post.dislikes.all.count }}</span></i>
                   </div>
                 </button>
-                {%if user.id == post.username_id%}
-                <a style="color:grey" href="{% url 'update_post' post.id %}">Edit</a>
-                <a style="color:grey" href="{% url 'delete_post' post.id %}">Delete</a>
-                {% endif %}
               </form>
+              {%if user.id == post.username_id%}
+              <a class="float-right" style="color:grey" href="{% url 'update_post' post.id %}">Edit</a>
+              <a class="float-right" style="color:grey" href="{% url 'delete_post' post.id %}">Delete</a>
+              {% endif %}
             </div>
         </div>
     </div>
   </div>
 </div>
 <div class="col-md-8 card mb-4  mt-3 ">
-  <!-- <div class="col-md-8 card mb-4  mt-3 ">
-    <div class="card-body">
-      <h3>Leave a comment</h3>
-      <form method="post" style="margin-top: 1.3em;">
-        {{ comment_form.as_p }}
-        {% csrf_token %}
-        <button type="submit" class="btn btn-primary  btn-lg">Submit</button>
-      </form>
-    </div>
-  </div> -->
   <div class="ms-2">
     <a class="nav-link"
       href="{% url 'create_comment' post.id %}">Add a comment
     </a>
   </div>
       <div class="card-body">
-        <!-- comments -->
         <h2>{{ comments.count }} comments</h2>
-
         {% for comment in comments %}
         <div class="comments" style="padding: 10px;">
-          <!-- <p class="font-weight-bold"> -->
           <a style= "color:gray; font-weight:bold; text-decoration:none"
               href="{% url 'user_detail' comment.user_id %}">{{ comment.user }}</a> |
-            <!-- {{ comment.user }} -->
           <span class=" text-muted font-weight-normal">
             {{ comment.created_on }}
           </span>
