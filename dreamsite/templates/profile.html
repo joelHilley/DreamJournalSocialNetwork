@@ -8,7 +8,7 @@
     <div class="col-md-4 text-left mt-4">
       <h1 style="color:white" class="display-6">{{user.username}}'s profile</h1>
       <h1 style="color:white" class="display-6">{{profile.nationality|capfirst}}</h1>
-      <h1 style="color:white" class="display-6">{{profile.age|capfirst}}</h1>
+      <h1 style="color:white" class="display-6">{{profile.age|capfirst}} years old</h1>
     </div>
     <div class="col-md-8 mt-3">
       {% if posts.count == 0 %}
