@@ -40,23 +40,25 @@
     </div>
   </div>
 </div>
-<div class="ms-2">
-  <button class='mx-5 mt-3 btn btn-md btn-fill btn-primary'"
-    href="{% url 'create_comment' post.id %}">Add a comment
-  </button>
-</div>
-<div class="card-body">
-  <h2>{{ comments.count }} comments</h2>
-  {% for comment in comments %}
-  <div class="comments" style="padding: 10px;">
-    <a style= "color:gray; font-weight:bold; text-decoration:none"
-        href="{% url 'user_detail' comment.user_id %}">{{ comment.user }}</a> |
-    <span class=" text-muted font-weight-normal">
-      {{ comment.created_on }}
-    </span>
-    </p>
-    {{ comment.body | linebreaks }}
+<div class="col-md-8 card mb-4  mt-3 ">
+  <div class="ms-2">
+    <a class="nav-link"
+      href="{% url 'create_comment' post.id %}">Add a comment
+    </a>
   </div>
-  {% endfor %}
-</div>
+      <div class="card-body">
+        <h2>{{ comments.count }} comments</h2>
+        {% for comment in comments %}
+        <div class="comments" style="padding: 10px;">
+          <a style= "color:gray; font-weight:bold; text-decoration:none"
+              href="{% url 'user_detail' comment.user_id %}">{{ comment.user }}</a> |
+          <span class=" text-muted font-weight-normal">
+            {{ comment.created_on }}
+          </span>
+          </p>
+          {{ comment.body | linebreaks }}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
 {% endblock content %}
