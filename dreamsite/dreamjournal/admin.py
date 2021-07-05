@@ -3,7 +3,7 @@ from account.models import Account
 from dreamjournal.models import JournalPost, Comment
 
 class UserAdmin (admin.ModelAdmin):
-    list_display = ('id','username','email','date_of_birth','sex','nationality','is_superuser','is_admin')
+    list_display = ('id','username','email','date_of_birth','age','sex','nationality','is_superuser','is_admin')
     list_display_links = ('email', 'username')
     list_filter = ('username', 'email')
     search_fields = ('username', 'email', 'nationality')

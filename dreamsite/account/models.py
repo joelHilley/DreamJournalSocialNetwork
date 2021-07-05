@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from datetime import datetime
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django_countries.fields import CountryField
 
@@ -55,6 +56,9 @@ class Account(AbstractBaseUser):
 
     email = models.EmailField(verbose_name='email address', max_length=60, unique=True)
     username = models.CharField(max_length=25, unique=True)
+    @property
+    def age(self):
+        return int((datetime.now().date() - self.date_of_birth).days / 365.25)
     date_of_birth = models.DateField(verbose_name='date of birth', help_text='YYYY-MM-DD')
     sex = models.CharField(choices=SEX_CHOICES, max_length=6, help_text="Not Required")
     nationality = CountryField(blank_label='(select country)')

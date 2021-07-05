@@ -93,7 +93,7 @@ def create_comment(request, id):
         form = CommentForm()
     return render(request, 'create_comment.html',
     { 'form': form })
-    
+
 @login_required
 def search(request):
     if request.method == 'POST':
