@@ -4,7 +4,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="card mb-4" style="background-image:linear-gradient(to bottom right,{{post.colors_seen}},{{post.colors_seen}}); color:white">
+    <div class="card mt-6 bt-6" style="background-image:linear-gradient(to bottom right,{{post.colors_seen}},{{post.colors_seen}}); color:white">
         <div class="card-body" style=" background-color: #212529; border-radius: 0px; margin-bottom:13px; margin-top:13px">
           <a style= "color:white; font-weight:bold; text-decoration:none" href="{% url 'user_detail' post.username_id %}">
           {{ post.username }}</a> | {{ post.created_at}} | {{user.id}}
@@ -32,33 +32,35 @@
                 </button>
               </form>
               {%if user.id == post.username_id%}
-              <a class="float-right" style="color:grey" href="{% url 'update_post' post.id %}">Edit</a>
-              <a class="float-right" style="color:grey" href="{% url 'delete_post' post.id %}">Delete</a>
+              <div class="ml-6">
+              <a class="float-left" style="color:grey" href="{% url 'update_post' post.id %}">Edit /</a>
+
+              <a class="float-left ml-3" style="color:grey" href="{% url 'delete_post' post.id %}">Delete</a>
+              </div>
               {% endif %}
             </div>
         </div>
     </div>
   </div>
 </div>
+<div class="col-md-4"></div>
 <div class="col-md-8 card mb-4  mt-3 ">
   <div class="ms-2">
     <a class="nav-link"
-      href="{% url 'create_comment' post.id %}">Add a comment
+      href="{% url 'create_comment' post.id %}">Add a comment...
     </a>
   </div>
-      <div class="card-body">
-        <h2>{{ comments.count }} comments</h2>
-        {% for comment in comments %}
-        <div class="comments" style="padding: 10px;">
-          <a style= "color:gray; font-weight:bold; text-decoration:none"
-              href="{% url 'user_detail' comment.user_id %}">{{ comment.user }}</a> |
-          <span class=" text-muted font-weight-normal">
-            {{ comment.created_on }}
-          </span>
-          </p>
-          {{ comment.body | linebreaks }}
-        </div>
-        {% endfor %}
-      </div>
+  <div class="card-body">
+    <h2>{{ comments.count }} comments</h2>
+    {% for comment in comments %}
+    <div class="comments" style="padding: 10px;">
+      <a style= "color:gray; font-weight:bold; text-decoration:none"
+          href="{% url 'user_detail' comment.user_id %}">{{ comment.user }}</a> |
+      <span class=" text-muted font-weight-normal">{{ comment.created_on }}</span>
+      {{ comment.body | linebreaks }}
     </div>
+    {% endfor %}
+  </div>
+</div>
+<div class="col-md-2"></div>
 {% endblock content %}
