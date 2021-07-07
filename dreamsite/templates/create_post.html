@@ -9,7 +9,7 @@
       <div class="col-md-10 my-5 alert alert-secondary" role="alert">
         <h2 class="text-center mt-2">Your latest dream to share..</h2>
         <div class="row pl-5">
-            <form method="post">
+            <form method="POST">
                 {% csrf_token %}
                 {{ form.as_p}}
                 <button class='mx-5 mt-3 btn btn-md btn-fill btn-primary'

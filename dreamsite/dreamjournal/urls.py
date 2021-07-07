@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import AboutPageView, user_detail, post_detail, profile, AddLike, AddDislike, search, UpdatePostView, DeletePostView
+from .views import AboutPageView, user_detail, post_detail, profile, AddLike, AddDislike, search, UpdatePostView, DeletePostView, add_journal_post
 from . import views
 
 
