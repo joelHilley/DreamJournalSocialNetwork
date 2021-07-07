@@ -28,7 +28,7 @@ urlpatterns = [
     # messaging urls
     # path('', include(('messenger.urls', 'inbox'), namespace='messenger')),
     path('inbox/', ListConversations.as_view(), name='inbox'),
-    path('inbox/new_convo', CreateConversation.as_view(), name='new_convo'),
+    path('inbox/new_convo/', CreateConversation.as_view(), name='new_convo'),
     path('inbox/<int:pk>', ConversationView.as_view(), name='convo'),
     path('inbox/<int:pk>/new_message', NewMessage.as_view(), name='new_message'),
 ]

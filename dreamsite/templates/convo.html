@@ -5,10 +5,10 @@
 <div class="container">
 	<div class="row">
 		<div class="card col-md-12 mt-5 p-3 shadow-sm">
-			{% if conversation.receiver == request.user %}
-				<h5>@{{ conversation.user }}</h5>
+			{% if convo.receiver == request.user %}
+				<h5>@{{ convo.user }}</h5>
 			{% else %}
-				<h5>@{{ conversation.receiver }}</h5>
+				<h5>@{{ convo.receiver }}</h5>
 			{% endif %}
 		</div>
 	</div>
@@ -24,11 +24,11 @@
 	{% for message in message_list %}
 	<div class="row">
 		<div class="col-md-12 my-1">
-			{% if message.sender_user == request.user %}
+			{% if message.sender == request.user %}
 				<div class="my-3">
 					<p>{{ message.message }}</p>
 				</div>
-			{% elif message.receiver_user == request.user %}
+			{% elif message.receiver == request.user %}
 				<div class="my-3">
 					<p>{{ message.message }}</p>
 				</div>
@@ -39,7 +39,7 @@
 
 	<div class="row">
 		<div class="card col-md-12 p-3 shadow-sm">
-			<form method="POST" action="{% url 'new_message' conversation.pk %}">
+			<form method="POST" action="{% url 'new_message' convo.pk %}">
 				{% csrf_token %}
 				{{ form }}
 

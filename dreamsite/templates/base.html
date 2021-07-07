@@ -52,7 +52,7 @@
                 <a class="nav-link" aria-current="page" href="{% url 'about' %}">About</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="{% url 'contact' %}">Contact us</a>
+                <a class="nav-link" aria-current="page" href="{% url 'contact' %}">Contact</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Type</a>
@@ -80,7 +80,7 @@
               <button class="btn btn-outline-warning" type="submit">Search</button>
             </form>
             <li class="nav-item d-flex">
-              <a class="nav-link mr-5" aria-current="page" href="{% url 'logout' %}?next={{request.path}}">Logout</a>
+              <a class="nav-link mr-5" aria-current="page" href="{% url 'logout' %}?next={% url 'home' %}">Logout</a>
             </li>
             <li>
               <a class="navbar-brand" aria-current="page" href="{% url 'profile' user.pk %}">  Hi, {{ user.username }}!</a>

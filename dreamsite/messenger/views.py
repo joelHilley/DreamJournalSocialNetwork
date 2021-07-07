@@ -43,7 +43,7 @@ class CreateConversation(View):
 
                 return redirect('conversation', pk=conversation.pk)
         except:
-            return redirect('inbox')
+            return redirect('convo.html')
 
 class ConversationView(View):
     def get(self, request, pk, *args, **kwargs):
