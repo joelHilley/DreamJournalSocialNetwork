@@ -22,6 +22,16 @@ class CommentAdmin(admin.ModelAdmin):
     list_filter = ('user', 'created_on')
     search_fields = ('user', 'body')
 
+class ConversationAdmin(admin.ModelAdmin):
+    list_display = ('user', 'created_on')
+    list_filter = ('user', 'created_on')
+    search_fields = ('user', 'created_on')
+
+class MessageAdmin(admin.ModelAdmin):
+    list_display = ('sender', 'recipient', 'message')
+    list_filter = ('sender', 'recipient')
+    search_fields = ('sender', 'recipient')
+
 
 admin.site.register(Account, UserAdmin)
 admin.site.register(JournalPost, JournalPostAdmin)

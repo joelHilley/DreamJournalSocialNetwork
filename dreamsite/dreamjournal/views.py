@@ -140,10 +140,6 @@ class FantasyListView(generic.ListView):
     template_name = 'fantasy.html'
 
 
-# class PostDetailView(generic.DetailView):
-#     model = JournalPost
-#     template_name = 'post_detail.html'
-
 from django.views.generic import TemplateView
 
 class AboutPageView(TemplateView):

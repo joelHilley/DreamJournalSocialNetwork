@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    
+
     # DataFlair
     'django.contrib.staticfiles',
     'multiselectfield',
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'dreamjournal',
     "django_bootstrap5",
     'contact',
+    'messenger',
 ]
 
 MIDDLEWARE = [
@@ -151,4 +152,3 @@ EMAIL_HOST_PASSWORD = 'JMP@Group'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
-
