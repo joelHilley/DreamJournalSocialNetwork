@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Conversation(models.Model):
     user = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='user')
-    reciever = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='reciever')
+    receiver = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='receiver')
     created_on = models.DateTimeField(auto_now_add=True)
 
     class Meta:

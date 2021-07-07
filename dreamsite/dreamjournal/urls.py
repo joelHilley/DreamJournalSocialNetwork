@@ -1,7 +1,7 @@
 from django.urls import path, include
 from .views import AboutPageView, user_detail, post_detail, profile, AddLike, AddDislike, search, UpdatePostView, DeletePostView
 from . import views
-from messenger.views import ListConversations, CreateConversation
+from messenger.views import ListConversations, CreateConversation, ConversationView, NewMessage
 
 
 urlpatterns = [
@@ -25,7 +25,10 @@ urlpatterns = [
     # edit and delete posts
     path('post_detail/edit/<int:pk>', UpdatePostView.as_view(), name='update_post'),
     path('post_detail/delete/<int:pk>', DeletePostView.as_view(), name='delete_post'),
-    path('', include(('messenger.urls', 'inbox'), namespace='messenger')),
+    # messaging urls
+    # path('', include(('messenger.urls', 'inbox'), namespace='messenger')),
     path('inbox/', ListConversations.as_view(), name='inbox'),
     path('inbox/new_convo', CreateConversation.as_view(), name='new_convo'),
+    path('inbox/<int:pk>', ConversationView.as_view(), name='convo'),
+    path('inbox/<int:pk>/new_message', NewMessage.as_view(), name='new_message'),
 ]

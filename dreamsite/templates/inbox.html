@@ -15,11 +15,11 @@
 		</div>
 	</div>
 
-	{% for conversation in conversations.all %}
+	{% for convo in conversations.all %}
 	<div class="row mb-3">
 		<div class="card col-md-12 p-5 shadow-sm">
-			<h5>{{ conversation.user }} - {{ conversation.receiver }}</h5>
-			<a class="stretched-link" href="{% url 'thread' thread.pk %}"></a>
+			<h5>{{ convo.user }} - {{ convo.receiver }}</h5>
+			<a class="stretched-link" href="{% url 'convo' convo.pk %}"></a>
 		</div>
 	</div>
 	{% endfor %}

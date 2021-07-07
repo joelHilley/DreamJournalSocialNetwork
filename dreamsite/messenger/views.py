@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 
 class ListConversations(View):
     def get(self, request, *args, **kwargs):
-        conversations = Conversation.objects.filter(Q(user = request.user) | Q(reciever = request.user))
+        conversations = Conversation.objects.filter(Q(user = request.user) | Q(receiver = request.user))
 
         context = {'conversations':conversations}
 
@@ -29,32 +29,49 @@ class CreateConversation(View):
         username = request.POST.get('username')
 
         try:
-            reciever = Account.objects.get(username=username)
-            if Conversation.objects.filter(user=request.user, reciever=reciever).exists():
-                conversation = Conversation.objects.filter(user=request.user, reciever=reciever)[0]
+            receiver = Account.objects.get(username=username)
+            if Conversation.objects.filter(user=request.user, receiver=receiver).exists():
+                conversation = Conversation.objects.filter(user=request.user, receiver=receiver)[0]
                 return redirect('conversation', pk=conversation.pk)
-            elif Conversation.objects.filter(user=reciever, reciver=request.user).exists():
-                conversation = Conversation.objects.filter(user=reciever, reciver=request.user)[0]
+            elif Conversation.objects.filter(user=receiver, receiver=request.user).exists():
+                conversation = Conversation.objects.filter(user=receiver, receiver=request.user)[0]
                 return redirect('conversation', pk=conversation.pk)
 
             if form.is_valid():
-                conversation = Conversation(user=request.user, reciever=reciever)
+                conversation = Conversation(user=request.user, receiver=receiver)
                 conversation.save()
 
                 return redirect('conversation', pk=conversation.pk)
         except:
-            return redirect('new_convo')
+            return redirect('inbox')
 
 class ConversationView(View):
     def get(self, request, pk, *args, **kwargs):
         form = MessageForm()
+        convo = Conversation.objects.get(pk=pk)
+        message_list = Message.objects.filter(convo__pk__contains=pk)
+
+        context = {'form':form,'convo':convo,'message_list':message_list}
+
+        return render(request, 'convo.html', context)
+
+class NewMessage(View):
+    def post(self, request, pk, *args, **kwargs):
         conversation = Conversation.objects.get(pk=pk)
-        message_list = Message.objects.filter(conversation__pk__contains=pk)
+        if conversation.receiver == request.user:
+            receiver = conversation.user
+        else:
+            receiver = conversation.receiver
 
-        context = {'form':form,'conversation':conversation,'message_list':message_list}
+        message = Message(
+            convo=conversation,
+            sender=request.user,
+            recipient=receiver,
+            message=request.POST.get('message')
+        )
 
-        return render(request, 'convo.html', request)
-
+        message.save()
+        return redirect('convo', pk=pk)
 
 
 
