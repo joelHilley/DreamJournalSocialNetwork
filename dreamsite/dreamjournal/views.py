@@ -53,26 +53,26 @@ def profile(request, pk):
     profile = request.user
     posts = JournalPost.objects.filter(username_id=pk).order_by('-created_at')
 
-    followers = profile.followers.all()
+    # followers = profile.followers.all()
 
-    if len(followers) == 0:
-      is_following = False
+    # if len(followers) == 0:
+    #   is_following = False
 
-    for follower in followers:
-      if follower == request.user:
-        is_following = True
-        break
-      else:
-        is_following = False
+    # for follower in followers:
+    #   if follower == request.user:
+    #     is_following = True
+    #     break
+    #   else:
+    #     is_following = False
 
-    nuber_of_followers = len(followers)
+    # nuber_of_followers = len(followers)
 
     context = {
       'pk': pk,
       'profile': profile,
       'posts': posts,
-      'number_of_followers': nuber_of_followers,
-      'is_following': is_following,
+      # 'number_of_followers': nuber_of_followers,
+      # 'is_following': is_following,
     }
 
     return render(request, 'profile.html', context)
