@@ -12,7 +12,7 @@
     <script src="https://kit.fontawesome.com/0da6f7d6ea.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static 'base.css' %}">
     <script src="{% static 'script.js' %}" ></script>
-    
+
     <!-- # About page/contact form style -->
     <style>
       body{
@@ -26,7 +26,7 @@
       .contact-form{
         background:rgba(0,0,0,.6);
         color:white;
-        margin-top: 60px;
+        margin-top: 10em;
         margin-bottom: 100px;
         padding: 20px;
         box-shadow: 0px 0px 10px 3px grey;
@@ -35,6 +35,35 @@
       #id_Email {
         color: black;
       }
+
+      .card {
+        opacity: 0.7;
+        color: black;
+      }
+
+      .card img {
+        height: 30rem;
+      }
+
+      .card-title, .card-text {
+
+        opacity: 0.9;
+
+      }
+
+      /* inbox style */
+      .inbox {
+        margin-top: 8em;
+        margin-left: 15px;
+        font-size: 25px;
+      }
+
+      .convo {
+        margin-top: 5em;
+        color: rgb(2, 66, 2);
+        font-size: 18px;
+      }
+
     </style>
   </head>
   <body id="bg" style="background-image: url({% static '/img/background-dreamcatcher2.jpg' %}); no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
@@ -43,8 +72,8 @@
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container-fluid">
           <a class="navbar-brand display-5 ml-6" href="{% url 'home' %}">Dream Catcher</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
-                  data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                   aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -54,7 +83,7 @@
                 <a class="nav-link" aria-current="page" href="{% url 'about' %}">About</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="{% url 'contact' %}">Contact us</a>
+                <a class="nav-link" aria-current="page" href="{% url 'contact' %}">Contact</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Type</a>
@@ -72,6 +101,9 @@
                   <li><a class="dropdown-item" href="{% url 'fantasy' %}">Unreal/Fantasy</a></li>
                 </ul>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="{% url 'inbox' %}">Inbox</a>
+              </li>
             </ul>
             <form class="d-flex" method="POST" action = "{% url 'search' %}">
             {% csrf_token %}
@@ -79,7 +111,7 @@
               <button class="btn btn-outline-warning" type="submit">Search</button>
             </form>
             <li class="nav-item d-flex">
-              <a class="nav-link mr-5" aria-current="page" href="{% url 'logout' %}?next={{request.path}}">Logout</a>
+              <a class="nav-link mr-5" aria-current="page" href="{% url 'logout' %}?next={% url 'home' %}">Logout</a>
             </li>
             <li>
               <a class="navbar-brand" aria-current="page" href="{% url 'profile' user.pk %}">  Hi, {{ user.username }}!</a>

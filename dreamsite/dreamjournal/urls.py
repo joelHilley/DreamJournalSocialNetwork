@@ -1,6 +1,7 @@
 from django.urls import path, include
 from .views import AboutPageView, user_detail, post_detail, profile, AddLike, AddDislike, search, UpdatePostView, DeletePostView, add_journal_post
 from . import views
+from messenger.views import ListConversations, CreateConversation, ConversationView, NewMessage
 
 
 urlpatterns = [
@@ -19,9 +20,18 @@ urlpatterns = [
     # added for likes and dislikes function
     path('post/<int:pk>/like', AddLike.as_view(), name='like'),
     path('post/<int:pk>/dislike', AddDislike.as_view(), name='dislike'),
+    # search posts content
     path('search/', search, name='search'),
+    # edit and delete posts
     path('post_detail/edit/<int:pk>', UpdatePostView.as_view(), name='update_post'),
     path('post_detail/delete/<int:pk>', DeletePostView.as_view(), name='delete_post'), 
     # path('profile/<int:pk>/followers/add', AddFollower.as_view(), name='add-follower'),for following functionality
     # path('profile/<int:pk>/followers/remove', RemoveFollower.as_view(), name='remove-follower'),
+    path('post_detail/delete/<int:pk>', DeletePostView.as_view(), name='delete_post'),
+    # messaging urls
+    # path('', include(('messenger.urls', 'inbox'), namespace='messenger')),
+    path('inbox/', ListConversations.as_view(), name='inbox'),
+    path('inbox/new_convo/', CreateConversation.as_view(), name='new_convo'),
+    path('inbox/<int:pk>', ConversationView.as_view(), name='convo'),
+    path('inbox/<int:pk>/new_message', NewMessage.as_view(), name='new_message'),
 ]

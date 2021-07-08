@@ -7,47 +7,47 @@
     <div class="row display-3 text-white" style="border-top: 200px;"><h2>Latest Post....</h2></div>
         <div class="row bt-6">
             <div class="input-group">
-                <div class="my-6 py-6 mt-6" style="margin-top: 40px;">
-                    <input type="text" class="form-control text-center" onfocusin="create_post()"
-                        placeholder="Have a new dream?..." aria-label="create post input" 
-                        aria-describedby="You want to share a new dream?">
-                    </div>
+                <div class="my-6 py-6 mt-6">
+                    <input type="text" class="form-control " onfocusin="create_post()" placeholder="Have a new dream?..." 
+                            aria-label="create post input" aria-describedby="Share new dream" />
                 </div>
             </div>
-            {% for post in journalpost_list %}
-            <div class="card mb-4" style="background-image:linear-gradient(to bottom right,{{post.colors_seen}},{{post.colors_seen}}); color:white">
-                <div class="card-body" style=" background-color: #212529; border-radius: 0px; margin-bottom:13px; margin-top:13px;">
-                    <a style= "color:white; font-weight:bold; text-decoration:none" href="{% url 'user_detail' post.username_id %}">
-                    {{ post.username }}</a> | {{ post.created_at}}
-                    <h2 class="card-title">{{ post.title }}</h2>
-                    <span>{{ post.category}}   {{ post.type}}</span>
-                    <p class="card-text">{{post.content|slice:":500" }}</p>
-                    <div class="d-flex flex-row"> 
-                        <a style="color:grey" href="{% url 'post_detail' post.id %}">{{ post.comments.count }} comments</a>
-                        <form method="POST" action="{% url 'like' post.id %}">
-                            {% csrf_token %}
-                                <input type="hidden" name="next" value="{{ request.path }}">
-                                <button style="background-color: transparent; border: none; box-shadow: none;" type="submit">
-                                        <div class="ml-5">
-                                            <i class="far fa-thumbs-up"><span>{{ post.likes.all.count }}</span></i>
-                                        </div>
-                                </button>
-                        </form>
-                        <form method="POST" action="{% url 'dislike' post.id %}">
-                            {% csrf_token %}
-                                <input type="hidden" name="next" value="{{ request.path }}">
-                                <button style="background-color: transparent; border: none; box-shadow: none;" type="submit">
-                                    <div class="ml-5">
-                                        <i class="far fa-thumbs-down"><span>{{ post.dislikes.all.count }}</span></i>
-                                    </div>
-                                </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
         </div>
-
+    </div>
+    {% for post in journalpost_list %}
+    <div class="card mb-4" style="background-image:linear-gradient(to bottom right,{{post.colors_seen}},{{post.colors_seen}}); color:white">
+        <div class="card-body" style=" background-color: #212529; border-radius: 0px; margin-bottom:13px; margin-top:13px;">
+            <a style= "color:white; font-weight:bold; text-decoration:none" href="{% url 'user_detail' post.username_id %}">
+            {{ post.username }}</a> | {{ post.created_at}}
+            <h2 class="card-title">{{ post.title }}</h2>
+            <span>{{ post.category}}   {{ post.type}}</span>
+            <p class="card-text">{{post.content|slice:":500" }}</p>
+            <div class="d-flex flex-row">
+                <a style="color:grey" href="{% url 'post_detail' post.id %}">{{ post.comments.count }} comments</a>
+                <form method="POST" action="{% url 'like' post.id %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.path }}">
+                    <button style="background-color: transparent; border: none; box-shadow: none;" type="submit">
+                        <div class="ml-5">
+                            <i class="far fa-thumbs-up"><span>{{ post.likes.all.count }}</span></i>
+                        </div>
+                    </button>
+                </form>
+                <form method="POST" action="{% url 'dislike' post.id %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.path }}">
+                    <button style="background-color: transparent; border: none; box-shadow: none;" type="submit">
+                        <div class="ml-5">
+                            <i class="far fa-thumbs-down"><span>{{ post.dislikes.all.count }}</span></i>
+                        </div>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endfor %}  
+</div>
+  
 {% else %}
 <div class="container">
     <div class="row justify-content-center mt-5">

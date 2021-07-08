@@ -1,6 +1,33 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="container inbox">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Your Conversations</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <form method="GET" action="{% url 'new_convo' %}">
+        <button class="btn btn-light p-3" type="submit">New Conversation</button>
+			</form>
+		</div>
+	</div>
+
+	{% for convo in conversations.all %}
+	<div class="row mb-3">
+		<div class="card col-md-12 shadow-sm">
+      {% if user == convo.receiver%}
+			<h5>{{ convo.user }}</h5>
+      {% else %}
+      <h5>{{ convo.receiver }}</h5>
+      {% endif %}
+			<a class="stretched-link" href="{% url 'convo' convo.pk %}"></a>
+		</div>
+	</div>
+	{% endfor %}
+</div>
 
 
 {% endblock %}

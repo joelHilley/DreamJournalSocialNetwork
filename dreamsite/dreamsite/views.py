@@ -10,6 +10,3 @@ class AboutPage(TemplateView):
 
 class LoginPage(TemplateView):
   template_name = 'login.html'
-
-class InboxPage(TemplateView):
-  template_name = 'inbox.html'

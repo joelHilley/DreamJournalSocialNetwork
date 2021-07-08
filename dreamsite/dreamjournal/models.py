@@ -33,7 +33,7 @@ class JournalPost(models.Model):
     ]
 
     username = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='poster')
-    title = models.CharField(max_length=50, unique=True)
+    title = models.CharField(max_length=50)
     content = models.TextField(max_length=500)
     type = models.CharField(blank=True, choices=TYPE_CHOICES, max_length=10)
     category = models.CharField(blank=True, choices=CATEGORY_CHOICES, max_length=15)
@@ -49,10 +49,8 @@ class JournalPost(models.Model):
         ordering = ['-created_at']
 
     def __str__(self):
-        return self.title
+        return self.id
 
-    def __str__(self):
-        return self.username
 
     def __str__(self):
       return self.followers
@@ -62,7 +60,7 @@ class Comment(models.Model):
     user = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='commenter')
     body = models.TextField(max_length=400)
     created_on = models.DateTimeField(auto_now_add=True)
-    post = models.ForeignKey('JournalPost', on_delete=models.CASCADE, blank=True, null=True)
+    post = models.ForeignKey(JournalPost, on_delete=models.CASCADE, blank=True, null=True)
 
     class Meta:
         ordering = ['created_on']
