@@ -5,9 +5,6 @@
   <div class="row">
     <div class="col-md-12">
       <h2>Your Conversations</h2>
-      <p>{{ user.username}}</p>
-      <p>{{user.email }}</p>
-      <p>{{user.sex}}</p>
     </div>
   </div>
   <div class="row">
@@ -21,7 +18,11 @@
 	{% for convo in conversations.all %}
 	<div class="row mb-3">
 		<div class="card col-md-12 shadow-sm">
-			<h5>{{ convo.user }} - {{ convo.receiver }}</h5>
+      {% if user == convo.receiver%}
+			<h5>{{ convo.user }}</h5>
+      {% else %}
+      <h5>{{ convo.receiver }}</h5>
+      {% endif %}
 			<a class="stretched-link" href="{% url 'convo' convo.pk %}"></a>
 		</div>
 	</div>
