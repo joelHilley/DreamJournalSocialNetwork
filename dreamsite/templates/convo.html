@@ -28,7 +28,7 @@
 				<div class="my-3">
 					<p>{{ message.message }}</p>
 				</div>
-			{% elif message.receiver == request.user %}
+			{% elif message.recipient == request.user %}
 				<div class="my-3">
 					<p>{{ message.message }}</p>
 				</div>

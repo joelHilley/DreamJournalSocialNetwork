@@ -33,7 +33,7 @@ class JournalPost(models.Model):
     ]
 
     username = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='poster')
-    title = models.CharField(max_length=50, unique=True)
+    title = models.CharField(max_length=50)
     content = models.TextField(max_length=500)
     type = models.CharField(blank=True, choices=TYPE_CHOICES, max_length=10)
     category = models.CharField(blank=True, choices=CATEGORY_CHOICES, max_length=15)
@@ -48,10 +48,8 @@ class JournalPost(models.Model):
         ordering = ['-created_at']
 
     def __str__(self):
-        return self.title
+        return self.id
 
-    def __str__(self):
-        return self.username
 
 class Comment(models.Model):
     post_title = models.ForeignKey(JournalPost, on_delete=models.CASCADE,related_name='comments')

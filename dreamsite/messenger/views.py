@@ -5,7 +5,7 @@ from . import views
 from django.views import generic, View
 from .forms import ConversationForm, MessageForm
 from account.models import Account
-from django.contrib.auth.models import User
+
 
 
 class ListConversations(View):
@@ -32,18 +32,22 @@ class CreateConversation(View):
             receiver = Account.objects.get(username=username)
             if Conversation.objects.filter(user=request.user, receiver=receiver).exists():
                 conversation = Conversation.objects.filter(user=request.user, receiver=receiver)[0]
-                return redirect('conversation', pk=conversation.pk)
+                print("first if works")
+                return redirect('convo', pk=conversation.pk)
+
             elif Conversation.objects.filter(user=receiver, receiver=request.user).exists():
                 conversation = Conversation.objects.filter(user=receiver, receiver=request.user)[0]
-                return redirect('conversation', pk=conversation.pk)
+                print("elif works")
+                return redirect('convo', pk=conversation.pk)
 
             if form.is_valid():
                 conversation = Conversation(user=request.user, receiver=receiver)
                 conversation.save()
-
-                return redirect('conversation', pk=conversation.pk)
+                print("valid form works")
+                return redirect('convo', pk=conversation.pk)
         except:
-            return redirect('convo.html')
+            print("not working")
+            return redirect('new_convo')
 
 class ConversationView(View):
     def get(self, request, pk, *args, **kwargs):
@@ -51,8 +55,12 @@ class ConversationView(View):
         convo = Conversation.objects.get(pk=pk)
         message_list = Message.objects.filter(convo__pk__contains=pk)
 
-        context = {'form':form,'convo':convo,'message_list':message_list}
-
+        context = {
+            'convo': convo,
+            'form': form,
+            'message_list': message_list
+         }
+         
         return render(request, 'convo.html', context)
 
 class NewMessage(View):
