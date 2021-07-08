@@ -244,12 +244,3 @@ class AddDislike(LoginRequiredMixin, View):
 #     profile.followers.remove(request.user)
 
 #     return redirect('profile', pk=profile.pk)
-
-
-
-
-
-
-
-
-
