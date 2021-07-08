@@ -1,83 +1,102 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
 <div class="container">
-  <div class="row">
-    <div class="col-md-4 mt-5">
-      <h1 style="color:white" class="display-3">{{profile.username}}'s profile</h1>
-      <h1 style="color:white" class="display-6">{{profile.nationality|capfirst}}</h1>
-      <h1 style="color:white" class="display-6">{{profile.date_of_birth|capfirst}}</h1>
-      {% if profile.username != me.username %}
-        <h2><a style="color:white" href="{% url 'new_convo' %}">Send {{profile.username}} a message</a></h2>
-      {% endif %}
-    </div>
-    <div class="col-md-8 mt-5">
-      {% for post in posts %}
-        {% if post.username_id == me.id %}
-        <div class="card mb-4" style="background-image:linear-gradient(to bottom right,{{post.colors_seen}},{{post.colors_seen}}); color:white">
-            <div class="card-body" style=" background-color: #212529; border-radius: 0px; margin-bottom:13px; margin-top:13px">
-              <a style= "color:white; font-weight:bold; text-decoration:none" href="{% url 'user_detail' post.username_id %}">
-              {{ post.username }}</a> | {{ post.created_at}}
-                <h2 class="card-title">{{ post.title }}</h2>
-                <span>{{ post.category}}   {{ post.type}}</span>
-                <p class="card-text">{{post.content|slice:":500" }}</p>
-                <div class="d-flex flex-row">
-                  <a style="color:grey" href="{% url 'post_detail' post.id %}">{{ post.comments.count }} comments</a>
-                  <form method="POST" action="{% url 'like' post.id %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="next" value="{{ request.path }}">
-                    <button style="background-color: transparent; border: none; box-shadow: none;" type="submit">
-                      <div class="ml-5">
-                        <i class="far fa-thumbs-up"><span>{{ post.likes.all.count }}</span></i>
-                      </div>
-                    </button>
-                  </form>
-                  <form method="POST" action="{% url 'dislike' post.id %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="next" value="{{ request.path }}">
-                    <button style="background-color: transparent; border: none; box-shadow: none;" type="submit">
-                      <div class="ml-5">
-                        <i class="far fa-thumbs-down"><span>{{ post.dislikes.all.count }}</span></i>
-                      </div>
-                    </button>
-                  </form>
+    <div class="row">
+        <div class="col-md-8 mt-5" style="padding-top: 50px;">
+            {% for post in posts %}
+            {% if post.username_id == me.id %}
+            <div class="card mb-4" style="background-image:linear-gradient(to bottom right,{{post.colors_seen}},{{post.colors_seen}}); color:white">
+                <div class="card-body" style=" background-color: #212529; border-radius: 0px; margin-bottom:13px; margin-top:13px">
+                    <a style= "color:white; font-weight:bold; text-decoration:none" href="{% url 'user_detail' post.username_id %}">
+                    {{ post.username }}</a> | {{ post.created_at}}
+                    <h2 class="card-title">{{ post.title }}</h2>
+                    <span>{{ post.category}}   {{ post.type}}</span>
+                    <p class="card-text">{{post.content|slice:":500" }}</p>
+                    <div class="d-flex flex-row">
+                        <a style="color:grey" href="{% url 'post_detail' post.id %}">{{ post.comments.count }} comments</a>
+                        <form method="POST" action="{% url 'like' post.id %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="next" value="{{ request.path }}" />
+                            <button style="background-color: transparent; border: none; box-shadow: none;" type="submit">
+                                <div class="ml-5">
+                                    <i class="far fa-thumbs-up"><span>{{ post.likes.all.count }}</span></i>
+                                </div>
+                            </button>
+                        </form>
+                        <form method="POST" action="{% url 'dislike' post.id %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="next" value="{{ request.path }}">
+                            <button style="background-color: transparent; border: none; box-shadow: none;" type="submit">
+                                <div class="ml-5">
+                                    <i class="far fa-thumbs-down"><span>{{ post.dislikes.all.count }}</span></i>
+                                </div>
+                            </button>
+                        </form>
+                    </div>                    
                 </div>
             </div>
-        </div>
-        {% elif post.privacy == 0 %}
-        <div class="card mb-4" style="background-image:linear-gradient(to bottom right,{{post.colors_seen}},{{post.colors_seen}}); color:white">
-            <div class="card-body" style=" background-color: #212529; border-radius: 0px; margin-bottom:13px; margin-top:13px">
-              <a style= "color:white; font-weight:bold; text-decoration:none" href="{% url 'user_detail' post.username_id %}">
-              {{ post.username }}</a> | {{ post.created_at}}
-                <h2 class="card-title">{{ post.title }}</h2>
-                <span>{{ post.category}}   {{ post.type}}</span>
-                <p class="card-text">{{post.content|slice:":500" }}</p>
-                <div class="d-flex flex-row">
-                  <a style="color:grey" href="{% url 'post_detail' post.id %}">{{ post.comments.count }} comments</a>
-                  <form method="POST" action="{% url 'like' post.id %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="next" value="{{ request.path }}">
-                    <button style="background-color: transparent; border: none; box-shadow: none;" type="submit">
-                      <div class="ml-5">
-                        <i class="far fa-thumbs-up"><span>{{ post.likes.all.count }}</span></i>
-                      </div>
-                    </button>
-                  </form>
-                  <form method="POST" action="{% url 'dislike' post.id %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="next" value="{{ request.path }}">
-                    <button style="background-color: transparent; border: none; box-shadow: none;" type="submit">
-                      <div class="ml-5">
-                        <i class="far fa-thumbs-down"><span>{{ post.dislikes.all.count }}</span></i>
-                      </div>
-                    </button>
-                  </form>
+            {% elif post.privacy == 0 %}
+            <div class="card mb-4" style="background-image:linear-gradient(to bottom right,{{post.colors_seen}},{{post.colors_seen}}); color:white">
+                <div class="card-body" style=" background-color: #212529; border-radius: 0px; margin-bottom:13px; margin-top:13px">
+                    <a style= "color:white; font-weight:bold; text-decoration:none" href="{% url 'user_detail' post.username_id %}">
+                        {{ post.username }}</a> | {{ post.created_at}}
+                    <h2 class="card-title">{{ post.title }}</h2>
+                    <span>{{ post.category}}   {{ post.type}}</span>
+                    <p class="card-text">{{post.content|slice:":500" }}</p>
+                    <div class="d-flex flex-row"> 
+                        <a style="color:grey" href="{% url 'post_detail' post.id %}">{{ post.comments.count }} comments</a>
+                        <form method="POST" action="{% url 'like' post.id %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="next" value="{{ request.path }}">
+                            <button style="background-color: transparent; border: none; box-shadow: none;" type="submit">
+                                <div class="ml-5">
+                                    <i class="far fa-thumbs-up"><span>{{ post.likes.all.count }}</span></i>
+                                </div>
+                            </button>
+                        </form>
+                        <form method="POST" action="{% url 'dislike' post.id %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="next" value="{{ request.path }}">
+                            <button style="background-color: transparent; border: none; box-shadow: none;" type="submit">
+                                <div class="ml-5">
+                                    <i class="far fa-thumbs-down"><span>{{ post.dislikes.all.count }}</span></i>
+                                </div>
+                            </button>
+                        </form>
+                    </div>                        
                 </div>
             </div>
+            {% endif %}
+            {% endfor %}
         </div>
-        {% endif %}
-      {% endfor %}
-    </div>
-
+        <div class="col-md-3 ml-2 mt-5 text-right" style="padding-top: 50px;">
+            <div class="mb-6">
+                <h2 style="color:white">{{profile.username}}'s profile</h2>
+                <h3 style="color:white">{{profile.nationality|capfirst}}</h3>
+                <h3 style="color:white">{{profile.age|capfirst}}</h3>
+            </div>
+            <!-- <div class="mb-6">
+                <p>Followers: {{ number_of_followers }}</p>
+            </div>
+            <div class="mb-6">
+                {% if user == request.user_id %}
+                {% else %}
+                    {% if is_following %}
+                    <form method="POST" action="{% url 'remove-follower' profile.pk %}">
+                        {% csrf_token %}
+                        <button class="btn btn-outline-danger" type="submit">Unfollow</button>
+                    </form>
+                    {% else %}
+                    <form method="POST" action="{% url 'add-follower' profile.pk %}">
+                        {% csrf_token %}
+                        <button class="btn btn-outline-success" type="submit">Follow</button>
+                    </form>
+                    {% endif %}
+                {% endif %}
+            </div>   -->
+        </div>    
+    </di>
 </div>
 {% endblock %}

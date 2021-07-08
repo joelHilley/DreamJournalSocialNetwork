@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, reverse
 from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login
 from django.views.generic import TemplateView, UpdateView, DeleteView
-from dreamjournal.models import JournalPost, Comment
+from .models import JournalPost, Comment
 from account.models import Account
 #from . import forms
 from dreamjournal.forms import JournalPostForm, CommentForm
@@ -52,7 +52,30 @@ def user_detail(request, pk):
 def profile(request, pk):
     profile = request.user
     posts = JournalPost.objects.filter(username_id=pk).order_by('-created_at')
-    return render(request, 'profile.html', {'pk': pk, "profile":profile, "posts":posts})
+
+    # followers = profile.followers.all()
+
+    # if len(followers) == 0:
+    #   is_following = False
+
+    # for follower in followers:
+    #   if follower == request.user:
+    #     is_following = True
+    #     break
+    #   else:
+    #     is_following = False
+
+    # nuber_of_followers = len(followers)
+
+    context = {
+      'pk': pk,
+      'profile': profile,
+      'posts': posts,
+      # 'number_of_followers': nuber_of_followers,
+      # 'is_following': is_following,
+    }
+
+    return render(request, 'profile.html', context)
 
 @login_required
 def add_journal_post(request):
@@ -205,3 +228,19 @@ class AddDislike(LoginRequiredMixin, View):
 
       next = request.POST.get('next', '/')
       return HttpResponseRedirect(next)
+
+# for following functionality
+
+# class AddFollower(LoginRequiredMixin, View):
+#   def post(self, request, pk, *args, **kwargs):
+#     profile = JournalPost.objects.get(pk=pk)
+#     profile.followers.add(request.user)
+
+#     return redirect('profile', pk=profile.pk)
+
+# class RemoveFollower(LoginRequiredMixin, View):
+#   def post(self, request, pk, *args, **kwargs):
+#     profile = JournalPost.objects.get(pk=pk)
+#     profile.followers.remove(request.user)
+
+#     return redirect('profile', pk=profile.pk)
