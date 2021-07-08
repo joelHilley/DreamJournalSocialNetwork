@@ -2,27 +2,27 @@
 
 {% block content %}
 
-<div class="container">
+<div class="convo">
 	<div class="row">
-		<div class="col-md-12 p-5">
+		<div class="col-md-12">
 			<a href="{% url 'inbox' %}" class="btn btn-light">Back to Your Inbox</a>
 		</div>
 	</div>
 
 	<div class="row">
-		<div class="col-md-12 p-5">
+		<div class="col-md-12 mt-5">
 			<h3>Start a Conversation!</h3>
 		</div>
 	</div>
 
-	<div class="row justify-content-center mt-3 mb-5">
+	<div class="row mt-3 mb-5">
 		<div class="col-md-5 col-sm-12">
 			<form method="POST">
 				{% csrf_token %}
 				<p>Enter the username for the person you would like to talk to.</p>
-				{{ form }}
+				{{ form.as_p }}
 				<div class="d-grid gap-2">
-					<button class="btn btn-success mt-3" type="submit">Continue</button>
+					<button class="btn btn-success mt-4" type="submit" style="font-size: 25px;">Continue</button>
 				</div>
 			</form>
 		</div>

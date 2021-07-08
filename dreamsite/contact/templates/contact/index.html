@@ -3,35 +3,35 @@
 
 {% block content %}
         <div class= "container contact-form">
-            <h1>Get in touch!</h1>
+            <h1 style="color: rgb(0, 0, 0); text-align: center; font-size: bold;">Get in touch!</h1>
             <div class= "row"></div>
             
             <hr>
           
-              <div class= "col-md-6">
-                <p>We would love to hear from you. If you have any question or need help please use the form below to send us an email.
+              <!-- <div class= "col-md-6" style="color: rgb(219, 22, 22); font-size: 30px;">
+                <p style="font-size: bold;">We would love to hear from you. If you have any question or need help please use the form below to send us an email.
                 </p>
                 <address>Auckland, Christchurch and Wellington NZ </address>
                 <p>Email: catcher.admcontact@gmail.com</p>
                 <p>Phone: 0800 000 00</p>
-              </div>   
+              </div>    -->
             <form method="POST" class="mb-lg-5">
 
                 <!-- Very Important csrf Token -->
                 {% csrf_token %}
-                <div class= "form-group">
-                    <label>Name</label>
+                <div class= "form-group" style="color: rgb(0, 0, 0); font-size: bold;">
+                    <label style="font-size: 30px;">Name</label>
                     <input type="text" class="form-control">
                 </div>
 
-                <div class= "form-group">
-                    <label>Message</label>
+                <div class= "form-group" style="color: rgb(0, 0, 0); font-size: bold;">
+                    <label style="font-size: 30px;">Message</label>
                     <textarea class="form-control" rows="7"></textarea>
                 </div>
                 
-                <div class = "form-group" style="color: black;">
+                <div class = "form-group" style="color: rgb(0, 0, 0); font-size: bold;">
                     <p>
-                    <h4 style="color: #fff;">{{ form.as_p }}</h4>
+                    <h4 style="color: rgb(0, 0, 0); font-size: 30px;">{{ form.as_p }}</h4>
                     </p>
                     <br>
                     <input type="submit" name="Contact" class = 'btn btn-primary btn-lg'>

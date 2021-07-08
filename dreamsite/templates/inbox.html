@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
+<div class="container inbox">
   <div class="row">
-    <div class="col-md-12 p-5">
-      <h3>Your Conversations</h3>
-      {{ user.username}}<br>
-      {{user.email }}<br>
-      {{user.sex}}
+    <div class="col-md-12">
+      <h2>Your Conversations</h2>
+      <p>{{ user.username}}</p>
+      <p>{{user.email }}</p>
+      <p>{{user.sex}}</p>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-12 p-5">
+    <div class="col-md-12">
       <form method="GET" action="{% url 'new_convo' %}">
         <button class="btn btn-light p-3" type="submit">New Conversation</button>
 			</form>
@@ -20,7 +20,7 @@
 
 	{% for convo in conversations.all %}
 	<div class="row mb-3">
-		<div class="card col-md-12 p-5 shadow-sm">
+		<div class="card col-md-12 shadow-sm">
 			<h5>{{ convo.user }} - {{ convo.receiver }}</h5>
 			<a class="stretched-link" href="{% url 'convo' convo.pk %}"></a>
 		</div>

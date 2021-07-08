@@ -41,7 +41,7 @@
 		<div class="card col-md-12 p-3 shadow-sm">
 			<form method="POST" action="{% url 'new_message' convo.pk %}">
 				{% csrf_token %}
-				{{ form }}
+				{{ form.as_p }}
 
 				<div class="d-grid gap-2 mt-3">
 					<button class="btn btn-light" type="submit">Send Message</button>
