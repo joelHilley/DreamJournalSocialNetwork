@@ -43,6 +43,7 @@ class JournalPost(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     likes = models.ManyToManyField(Account, blank=True, related_name='likes')
     dislikes = models.ManyToManyField(Account, blank=True, related_name='dislikes')
+    # followers = models.ManyToManyField(Account, blank=True, related_name='followers') for following functionality
 
     class Meta:
         ordering = ['-created_at']
@@ -52,6 +53,9 @@ class JournalPost(models.Model):
 
     def __str__(self):
         return self.username
+
+    def __str__(self):
+      return self.followers
 
 class Comment(models.Model):
     post_title = models.ForeignKey(JournalPost, on_delete=models.CASCADE,related_name='comments')

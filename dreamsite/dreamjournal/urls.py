@@ -15,11 +15,13 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('create_post/', views.add_journal_post, name='create_post'),
     path('create_comment/<int:id>', views.create_comment, name='create_comment'),
-    path('profile/<int:pk>', profile, name='profile'),
+    path('profile/<int:pk>', views.profile, name='profile'),
     # added for likes and dislikes function
     path('post/<int:pk>/like', AddLike.as_view(), name='like'),
     path('post/<int:pk>/dislike', AddDislike.as_view(), name='dislike'),
     path('search/', search, name='search'),
     path('post_detail/edit/<int:pk>', UpdatePostView.as_view(), name='update_post'),
-    path('post_detail/delete/<int:pk>', DeletePostView.as_view(), name='delete_post'),
+    path('post_detail/delete/<int:pk>', DeletePostView.as_view(), name='delete_post'), 
+    # path('profile/<int:pk>/followers/add', AddFollower.as_view(), name='add-follower'),for following functionality
+    # path('profile/<int:pk>/followers/remove', RemoveFollower.as_view(), name='remove-follower'),
 ]
