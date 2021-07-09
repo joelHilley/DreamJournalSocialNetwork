@@ -4,11 +4,11 @@
 
 {% if user.is_authenticated %}
 <div class="container">
-  <div class="row mt-5">
+  <div class="row mt-5" style="padding-top: 100px;">
     <div class="col-md-4 text-left mt-4">
-      <h1 style="color:rgb(5, 0, 0)" class="display-6">{{user.username}}'s profile</h1>
-      <h1 style="color:rgb(5, 0, 0)" class="display-6">{{profile.nationality|capfirst}}</h1>
-      <h1 style="color:rgb(5, 0, 0)" class="display-6">{{profile.age|capfirst}}</h1>
+      <h3 style="color:rgb(5, 0, 0)">{{user.username}}'s profile</h3>
+      <h3 style="color:rgb(5, 0, 0)">{{profile.nationality|capfirst}}</h3>
+      <h3 style="color:rgb(5, 0, 0)">{{profile.age|capfirst}}</h3>
     </div>
     <div class="col-md-8 mt-3">
       {% if posts.count == 0 %}
@@ -47,12 +47,12 @@
             {% endfor %}
             {% endif %}
         </div>
-        <div class="col-md-4 text-center mt-4">
+        <!-- <div class="col-md-4 text-center mt-4">
             <div class="mb-6">
                 <h3 style="color:white"> Profile:   {{user.username|capfirst}}</h3>
                 <h3 style="color:white">Location:   {{profile.nationality|capfirst}}</h3>
                 <h3 style="color:white">     Age:   {{profile.age|capfirst}}</h3>
-            </div>
+            </div> -->
             
             <!-- for future update of adding "following" a friend -->
             <!-- <div class="mb-6">
@@ -74,8 +74,8 @@
                         </form>
                     {% endif %}
                 {% endif %}
-            </div> -->
-        </di>
+            </div>
+        </div> -->
 </div>
 {% else %}
   <h2>Must be logged in to view your profile</h2>
