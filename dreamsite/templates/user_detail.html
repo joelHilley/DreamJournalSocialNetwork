@@ -34,7 +34,7 @@
                                 </div>
                             </button>
                         </form>
-                    </div>                    
+                    </div>
                 </div>
             </div>
             {% elif post.privacy == 0 %}
@@ -45,7 +45,7 @@
                     <h2 class="card-title">{{ post.title }}</h2>
                     <span>{{ post.category}}   {{ post.type}}</span>
                     <p class="card-text">{{post.content|slice:":500" }}</p>
-                    <div class="d-flex flex-row"> 
+                    <div class="d-flex flex-row">
                         <a style="color:grey" href="{% url 'post_detail' post.id %}">{{ post.comments.count }} comments</a>
                         <form method="POST" action="{% url 'like' post.id %}">
                             {% csrf_token %}
@@ -65,7 +65,7 @@
                                 </div>
                             </button>
                         </form>
-                    </div>                        
+                    </div>
                 </div>
             </div>
             {% endif %}
@@ -77,26 +77,8 @@
                 <h3 style="color:white">{{profile.nationality|capfirst}}</h3>
                 <h3 style="color:white">{{profile.age|capfirst}}</h3>
             </div>
-            <!-- <div class="mb-6">
-                <p>Followers: {{ number_of_followers }}</p>
-            </div>
-            <div class="mb-6">
-                {% if user == request.user_id %}
-                {% else %}
-                    {% if is_following %}
-                    <form method="POST" action="{% url 'remove-follower' profile.pk %}">
-                        {% csrf_token %}
-                        <button class="btn btn-outline-danger" type="submit">Unfollow</button>
-                    </form>
-                    {% else %}
-                    <form method="POST" action="{% url 'add-follower' profile.pk %}">
-                        {% csrf_token %}
-                        <button class="btn btn-outline-success" type="submit">Follow</button>
-                    </form>
-                    {% endif %}
-                {% endif %}
-            </div>   -->
-        </div>    
-    </di>
+      
+        </div>
+    </div>
 </div>
 {% endblock %}
