@@ -1,35 +1,38 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <div class="container inbox">
-    <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-8 text-white">
-            <h1 style="color: darkblue;">Your Conversations</h1>
-        </div>
+
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-8 text-white">
+        <h1 style="color: rgb(0, 0, 0); text-align: center;">Your Conversations</h1>
     </div>
   </div>
+
   <div class="row">
     <div class="col-md-12">
-      <form method="GET" action="{% url 'new_convo' %}">
-        <button class="btn btn-light p-3" style="margin-bottom: 20px;" type="submit">New Conversation</button>
+      <form method="GET" action="{% url 'new_convo' %}" style="text-align: center;">
+        <button class="btn btn-light p-3 mt-5 mb-5" style="display: block; margin-left: 35em;" type="submit">New Conversation</button>
 			</form>
 		</div>
 	</div>
 
 	{% for convo in conversations.all %}
-	<div class="row mb-3">
-        <div class="col-md-4"></div>
-		<div class="card col-md-8 shadow-sm">
+  <div class="row mb-3 mt-5">
+    <div class="col-md-4"></div>
+    <div class="card col-md-8 shadow-sm mt-5">
             {% if user == convo.receiver%}
-			    <h5>{{ convo.user }}</h5>
+          <h5>{{ convo.user }}</h5>
             {% else %}
                 <h5>{{ convo.receiver }}</h5>
             {% endif %}
-			    <a class="stretched-link" href="{% url 'convo' convo.pk %}"></a>
-		</div>
-	</div>
+          <a class="stretched-link" href="{% url 'convo' convo.pk %}"></a>
+    </div>
+  </div>
 	{% endfor %}
+
 </div>
 
 
