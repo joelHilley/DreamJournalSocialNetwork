@@ -2,9 +2,11 @@
 
 {% block content %}
 <div class="container inbox">
-  <div class="row">
-    <div class="col-md-12">
-      <h2>Your Conversations</h2>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-8 text-white">
+            <h1 style="color: darkblue;">Your Conversations</h1>
+        </div>
     </div>
   </div>
   <div class="row">
@@ -17,13 +19,14 @@
 
 	{% for convo in conversations.all %}
 	<div class="row mb-3">
-		<div class="card col-md-12 shadow-sm">
-      {% if user == convo.receiver%}
-			<h5>{{ convo.user }}</h5>
-      {% else %}
-      <h5>{{ convo.receiver }}</h5>
-      {% endif %}
-			<a class="stretched-link" href="{% url 'convo' convo.pk %}"></a>
+        <div class="col-md-4"></div>
+		<div class="card col-md-8 shadow-sm">
+            {% if user == convo.receiver%}
+			    <h5>{{ convo.user }}</h5>
+            {% else %}
+                <h5>{{ convo.receiver }}</h5>
+            {% endif %}
+			    <a class="stretched-link" href="{% url 'convo' convo.pk %}"></a>
 		</div>
 	</div>
 	{% endfor %}

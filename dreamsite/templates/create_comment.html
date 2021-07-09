@@ -4,17 +4,16 @@
 
   {% if user.is_authenticated %}
   <div class="container">
-    <div class="row mt-5">
+    <div class="row mt-5" style="padding-top: 100px;">
       <h2 class="text-center display-2 mt-4" 
-          style="color: #c98036">Your Comment</h2>
+          style="color: white; background-color: transparent;">Your Comment</h2>
       <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6 my-5 alert alert-secondary" role="alert">
-
           <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
-            <input type="submit" value="Submit">
+            <input type="submit" value="Submit" class="bg-primary text-white stretched-link">
           </form>
         </div>
       </div>

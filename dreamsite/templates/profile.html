@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
 
 {% if user.is_authenticated %}
@@ -44,11 +44,38 @@
                   </form>
                 </div>
             </div>
+            {% endfor %}
+            {% endif %}
         </div>
-        {% endfor %}
-        {% endif %}
-    </div>
-  </div>
+        <div class="col-md-4 text-center mt-4">
+            <div class="mb-6">
+                <h3 style="color:white"> Profile:   {{user.username|capfirst}}</h3>
+                <h3 style="color:white">Location:   {{profile.nationality|capfirst}}</h3>
+                <h3 style="color:white">     Age:   {{profile.age|capfirst}}</h3>
+            </div>
+            
+            <!-- for future update of adding "following" a friend -->
+            <!-- <div class="mb-6">
+                <p>Followers: {{ number_of_followers }}</p>
+            </div>
+            <div class="mb-6">
+                 
+                {% if username == request.username %}
+                    {% else %}
+                    {% if is_following %}
+                        <form method="POST" action="{% url 'remove-follower' profile.pk %}">
+                            {% csrf_token %}
+                            <button class="btn btn-outline-danger" type="submit">Unfollow</button>
+                        </form>
+                        {% else %}
+                        <form method="POST" action="{% url 'add-follower' profile.pk %}">
+                            {% csrf_token %}
+                            <button class="btn btn-outline-success" type="submit">Follow</button>
+                        </form>
+                    {% endif %}
+                {% endif %}
+            </div> -->
+        </di>
 </div>
 {% else %}
   <h2>Must be logged in to view your profile</h2>
