@@ -12,13 +12,16 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.views import View
+import random
 
 
-# REDUNDANT VIEW
-# def home(request):
-#     form = JournalPostForm()
-#     context = {'form' : form}
-#     return render(request, 'home.html', context)
+
+# def random_post(request):
+#     post_count = JournalPost.objects.all().count()
+#     print(post_count)
+#     random_val = random.randint(0, post_count-1)
+#     post_id = JournalPost.objects.values_list('id', flat=True)[random_val]
+#     return redirect('post_detail', post_id=id) #Redirect to post detail view
 
 def login_view(request):
     username = request.POST['username']
@@ -41,6 +44,14 @@ def post_detail(request, id):
         raise Http404('Post not found')
     return render(request, 'post_detail.html', {'post': post, 'comments': comments,})
 
+def random_post(request):
+    post_count = JournalPost.objects.all().count()
+    random_val = random.randint(0, post_count-1)
+    post = JournalPost.objects.values_list('id', flat=True)[random_val]
+    comments = Comment.objects.filter(post_title_id=post).order_by('-id')
+    
+    return render(request, 'random_post.html', {'post':post,'comments':comments})
+
 #view profile of  users
 @login_required
 def user_detail(request, pk):
@@ -53,26 +64,10 @@ def profile(request, pk):
     profile = request.user
     posts = JournalPost.objects.filter(username_id=pk).order_by('-created_at')
 
-    # followers = profile.followers.all()
-
-    # if len(followers) == 0:
-    #   is_following = False
-
-    # for follower in followers:
-    #   if follower == request.user:
-    #     is_following = True
-    #     break
-    #   else:
-    #     is_following = False
-
-    # nuber_of_followers = len(followers)
-
     context = {
       'pk': pk,
       'profile': profile,
       'posts': posts,
-      # 'number_of_followers': nuber_of_followers,
-      # 'is_following': is_following,
     }
 
     return render(request, 'profile.html', context)
@@ -228,19 +223,3 @@ class AddDislike(LoginRequiredMixin, View):
 
       next = request.POST.get('next', '/')
       return HttpResponseRedirect(next)
-
-# for following functionality
-
-# class AddFollower(LoginRequiredMixin, View):
-#   def post(self, request, pk, *args, **kwargs):
-#     profile = JournalPost.objects.get(pk=pk)
-#     profile.followers.add(request.user)
-
-#     return redirect('profile', pk=profile.pk)
-
-# class RemoveFollower(LoginRequiredMixin, View):
-#   def post(self, request, pk, *args, **kwargs):
-#     profile = JournalPost.objects.get(pk=pk)
-#     profile.followers.remove(request.user)
-
-#     return redirect('profile', pk=profile.pk)

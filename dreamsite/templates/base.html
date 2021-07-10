@@ -78,7 +78,7 @@
     </style>
   </head>
   <body id="bg" style="background-image: url({% static '/img/background-dreamcatcher2.jpg' %}); no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
-  </body>  
+  </body>
     <header>
     {% if user.is_authenticated %}
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -123,7 +123,7 @@
               <button class="btn btn-outline-warning" type="submit">Search</button>
             </form>
             <li class="nav-item d-flex">
-              <a class="nav-link mr-5" aria-current="page" href="{% url 'logout' %}?next={% url 'home' %}">Logout</a>
+              <a style="color:white" class="nav-link mr-5" aria-current="page" href="{% url 'logout' %}?next={% url 'home' %}">Logout</a>
             </li>
             <li>
               <a class="navbar-brand" aria-current="page" href="{% url 'profile' user.pk %}">  Hi, {{ user.username }}!</a>

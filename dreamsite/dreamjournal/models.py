@@ -4,6 +4,13 @@ from django.contrib.auth.models import User
 from django.db import models
 from multiselectfield import MultiSelectField
 
+
+# class JournalPostManager(models.Manager):
+#     def random(self):
+#         count = self.aggregate(count=Count('id'))['count']
+#         random_index = randint(0, count - 1)
+#         return self.all()[random_index]
+
 class JournalPost(models.Model):
     TYPE_CHOICES = [
     ('Dream', 'Dream'),
@@ -32,6 +39,9 @@ class JournalPost(models.Model):
     (1,'Private')
     ]
 
+    #get random JournalPost
+    # objects = JournalPostManager()
+
     username = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='poster')
     title = models.CharField(max_length=50)
     content = models.TextField(max_length=500)
@@ -43,17 +53,14 @@ class JournalPost(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     likes = models.ManyToManyField(Account, blank=True, related_name='likes')
     dislikes = models.ManyToManyField(Account, blank=True, related_name='dislikes')
-    # followers = models.ManyToManyField(Account, blank=True, related_name='followers') for following functionality
+
 
     class Meta:
         ordering = ['-created_at']
 
     def __str__(self):
-        return self.id
+        return self.title
 
-
-    def __str__(self):
-      return self.followers
 
 class Comment(models.Model):
     post_title = models.ForeignKey(JournalPost, on_delete=models.CASCADE,related_name='comments')

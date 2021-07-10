@@ -1,0 +1,91 @@
+
+# in template
+
+
+<!-- <div class="mb-6">
+    <p>Followers: {{ number_of_followers }}</p>
+</div>
+<div class="mb-6">
+    {% if user == request.user_id %}
+    {% else %}
+        {% if is_following %}
+        <form method="POST" action="{% url 'remove-follower' profile.pk %}">
+            {% csrf_token %}
+            <button class="btn btn-outline-danger" type="submit">Unfollow</button>
+        </form>
+        {% else %}
+        <form method="POST" action="{% url 'add-follower' profile.pk %}">
+            {% csrf_token %}
+            <button class="btn btn-outline-success" type="submit">Follow</button>
+        </form>
+        {% endif %}
+    {% endif %}
+</div>   -->
+
+
+
+-------------------------------------------------------------------------------------
+
+
+# for following functionality
+
+# class AddFollower(LoginRequiredMixin, View):
+#   def post(self, request, pk, *args, **kwargs):
+#     profile = JournalPost.objects.get(pk=pk)
+#     profile.followers.add(request.user)
+
+#     return redirect('profile', pk=profile.pk)
+
+# class RemoveFollower(LoginRequiredMixin, View):
+#   def post(self, request, pk, *args, **kwargs):
+#     profile = JournalPost.objects.get(pk=pk)
+#     profile.followers.remove(request.user)
+
+#     return redirect('profile', pk=profile.pk)
+
+
+------------------------------------------------------------------------------------------
+
+
+
+Journalpost model
+# followers = models.ManyToManyField(Account, blank=True, related_name='followers') for following functionality
+
+def __str__(self):
+    return self.followers
+
+
+------------------------------------------------------------------------------------------
+
+
+
+
+#in profile view
+
+def profile(request, pk):
+    profile = request.user
+    posts = JournalPost.objects.filter(username_id=pk).order_by('-created_at')
+
+    # followers = profile.followers.all()
+
+    # if len(followers) == 0:
+    #   is_following = False
+
+    # for follower in followers:
+    #   if follower == request.user:
+    #     is_following = True
+    #     break
+    #   else:
+    #     is_following = False
+
+    # nuber_of_followers = len(followers)
+
+    context = {
+      'pk': pk,
+      'profile': profile,
+      'posts': posts,
+      # 'number_of_followers': nuber_of_followers,
+      # 'is_following': is_following,
+    }
+
+    return render(request, 'profile.html', context)
